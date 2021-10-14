@@ -1,2 +1,2 @@
 # SeeFoodQuickly
-App for ordering food and keeping an order queue for a restaurant
+App for ordering food and keeping an order queue for a restaurant. Test.
