@@ -1,0 +1,43 @@
+2021-10-13 17:22:08,137 [Worker-3: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-10-13 17:25:03,032 [Worker-8: Import Getting Started Content] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.seefoodquickly:SeeFoodQuickly:0.0.1-SNAPSHOT @ C:\Users\stuart.yee\Documents\CodeStuff\Assignments\Projects_Algorithms\group_project\SeeFoodQuickly\SeeFoodQuickly\SeeFoodQuickly\pom.xml.
+2021-10-13 17:25:12,824 [Worker-8: Import Getting Started Content] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /SeeFoodQuickly/src/main/java
+2021-10-13 17:25:12,828 [Worker-8: Import Getting Started Content] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /SeeFoodQuickly/src/main/resources
+2021-10-13 17:25:12,839 [Worker-8: Import Getting Started Content] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /SeeFoodQuickly/src/main/resources
+2021-10-13 17:25:12,870 [Worker-8: Import Getting Started Content] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /SeeFoodQuickly/src/test/java
+2021-10-13 17:25:15,131 [Worker-8: Import Getting Started Content] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 19 sec
+2021-10-13 17:25:15,138 [Worker-8: Import Getting Started Content] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2021-10-13 17:25:17,357 [Worker-8: Import Getting Started Content] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.seefoodquickly:SeeFoodQuickly:0.0.1-SNAPSHOT @ C:\Users\stuart.yee\Documents\CodeStuff\Assignments\Projects_Algorithms\group_project\SeeFoodQuickly\SeeFoodQuickly\SeeFoodQuickly\pom.xml.
+2021-10-13 17:25:19,388 [Worker-8: Import Getting Started Content] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /SeeFoodQuickly/src/main/java
+2021-10-13 17:25:19,389 [Worker-8: Import Getting Started Content] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /SeeFoodQuickly/src/main/resources
+2021-10-13 17:25:19,390 [Worker-8: Import Getting Started Content] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /SeeFoodQuickly/src/main/resources
+2021-10-13 17:25:19,391 [Worker-8: Import Getting Started Content] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /SeeFoodQuickly/src/test/java
+2021-10-13 17:25:20,087 [Worker-8: Import Getting Started Content] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 4 sec
+2021-10-13 17:25:24,487 [Worker-10: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-10-13 17:25:24,488 [Worker-10: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2021-10-13 17:25:24,498 [Worker-10: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2021-10-13 17:25:24,550 [Worker-10: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-10-13 17:25:24,559 [Worker-10: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-10-13 17:25:24,559 [Worker-10: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2021-10-13 17:25:24,560 [Worker-10: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\stuart.yee\Documents\CodeStuff\Assignments\Projects_Algorithms\group_project\SeeFoodQuickly\SeeFoodQuickly\SeeFoodQuickly\src\test\resources
+2021-10-13 17:28:30,349 [Worker-7: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.seefoodquickly:SeeFoodQuickly:0.0.1-SNAPSHOT @ C:\Users\stuart.yee\Documents\CodeStuff\Assignments\Projects_Algorithms\group_project\SeeFoodQuickly\SeeFoodQuickly\SeeFoodQuickly\pom.xml.
+2021-10-13 17:28:31,904 [Worker-7: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-10-13 17:28:31,905 [Worker-7: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2021-10-13 17:28:31,910 [Worker-7: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-10-13 17:28:31,912 [Worker-7: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-10-13 17:28:31,921 [Worker-7: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-10-13 17:28:31,921 [Worker-7: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2021-10-13 17:28:31,922 [Worker-7: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\stuart.yee\Documents\CodeStuff\Assignments\Projects_Algorithms\group_project\SeeFoodQuickly\SeeFoodQuickly\SeeFoodQuickly\src\test\resources
+2021-10-13 17:28:34,975 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-10-13 17:28:34,976 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2021-10-13 17:28:34,979 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2021-10-13 17:28:34,992 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-10-13 17:28:34,996 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-10-13 17:28:34,996 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2021-10-13 17:28:34,996 [Worker-3: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\stuart.yee\Documents\CodeStuff\Assignments\Projects_Algorithms\group_project\SeeFoodQuickly\SeeFoodQuickly\SeeFoodQuickly\src\test\resources
+2021-10-13 17:29:39,929 [Worker-8: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-10-13 17:29:39,945 [Worker-8: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2021-10-13 17:29:39,949 [Worker-8: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2021-10-13 17:29:39,969 [Worker-8: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2021-10-13 17:29:39,976 [Worker-8: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2021-10-13 17:29:39,977 [Worker-8: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2021-10-13 17:29:39,977 [Worker-8: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\stuart.yee\Documents\CodeStuff\Assignments\Projects_Algorithms\group_project\SeeFoodQuickly\SeeFoodQuickly\SeeFoodQuickly\src\test\resources

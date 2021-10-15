@@ -1,0 +1,2 @@
+INDEX VERSION 1.131+C:\Users\stuart.yee\Documents\CodeStuff\Assignments\Projects_Algorithms\group_project\SeeFoodQuickly\SeeFoodQuickly\.metadata\.plugins\org.eclipse.jdt.core
+3934077973.index
