@@ -1,4 +1,4 @@
-package com.seefoodquickly;
+package com.seefoodquickly.services;
 
 import java.util.ArrayList;
 import java.util.List;
