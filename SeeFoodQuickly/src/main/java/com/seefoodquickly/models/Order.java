@@ -32,6 +32,10 @@ public class Order {
 	
 	private String orderNumber;
 	
+	private String orderEmail;
+	
+	private String orderPhone;
+	
 	private Boolean orderOpen;
 	
 	private float subtotal;
@@ -154,6 +158,22 @@ public class Order {
 
 	public void setItems(List<Item> items) {
 		this.items = items;
+	}
+
+	public String getOrderEmail() {
+		return orderEmail;
+	}
+
+	public void setOrderEmail(String orderEmail) {
+		this.orderEmail = orderEmail;
+	}
+
+	public String getOrderPhone() {
+		return orderPhone;
+	}
+
+	public void setOrderPhone(String orderPhone) {
+		this.orderPhone = orderPhone;
 	}
 	
 	

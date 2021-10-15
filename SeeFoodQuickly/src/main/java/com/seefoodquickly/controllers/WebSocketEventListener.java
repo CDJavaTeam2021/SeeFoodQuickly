@@ -17,6 +17,10 @@ import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 @Component
 public class WebSocketEventListener {
 
+	
+	////Used multi-line comment to disable code temporarily --> Stuart Yee
+    /*  
+	
     private static final Logger logger = LoggerFactory.getLogger(WebSocketEventListener.class);
 
     @Autowired
@@ -27,6 +31,9 @@ public class WebSocketEventListener {
         logger.info("Received a new web socket connection");
     }
 
+    
+    
+    
     @EventListener
     public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
         StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
@@ -41,5 +48,8 @@ public class WebSocketEventListener {
 
             messagingTemplate.convertAndSend("/topic/public", chatMessage);
         }
-    }
+    } 
+    
+    
+    */
 }
