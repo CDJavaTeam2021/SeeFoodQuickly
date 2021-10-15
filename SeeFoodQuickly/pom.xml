@@ -78,6 +78,11 @@
 		  <artifactId>twilio</artifactId>
 		  <version>8.20.0</version>
 		</dependency>
+		<dependency>
+    <groupId>com.stripe</groupId>
+    <artifactId>stripe-java</artifactId>
+    <version>10.12.1</version>
+</dependency>
 	</dependencies>
 
 	<build>
