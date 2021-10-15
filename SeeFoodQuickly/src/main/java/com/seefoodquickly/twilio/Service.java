@@ -1,4 +1,4 @@
-package com.seefoodquickly;
+package com.seefoodquickly.twilio;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

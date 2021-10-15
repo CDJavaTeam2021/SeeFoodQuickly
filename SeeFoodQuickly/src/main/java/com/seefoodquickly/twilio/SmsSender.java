@@ -1,4 +1,4 @@
-package com.seefoodquickly;
+package com.seefoodquickly.twilio;
 
 public interface SmsSender {
 	
