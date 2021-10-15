@@ -13,6 +13,9 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class ChatController {
 
+	//Used multi-line comment to disable code temporarily --> Stuart Yee
+	
+	/*
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
@@ -27,5 +30,7 @@ public class ChatController {
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
         return chatMessage;
     }
+    
+    */
 
 }
