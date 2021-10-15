@@ -1,4 +1,4 @@
-package com.seefoodquickly;
+package com.seefoodquickly.twilio;
 
 import javax.validation.constraints.NotBlank;
 

@@ -1,4 +1,4 @@
-package com.seefoodquickly;
+package com.seefoodquickly.twilio;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
