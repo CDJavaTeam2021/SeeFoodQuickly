@@ -72,6 +72,11 @@
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-reactor-netty</artifactId>
 		</dependency>
+		<dependency>
+    <groupId>com.stripe</groupId>
+    <artifactId>stripe-java</artifactId>
+    <version>10.12.1</version>
+</dependency>
 	</dependencies>
 
 	<build>
