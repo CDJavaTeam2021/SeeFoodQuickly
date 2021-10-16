@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="items")
@@ -33,6 +34,9 @@ public class Item {
 	private float lineTotal;
 	
 	private int quantity;
+	
+	@Transient
+	private int cartIndex; //tracks the index in the list representing the cart which is not persisted at checkout
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="order_id", updatable = true)
@@ -113,6 +117,14 @@ public class Item {
 
 	public void setItemProduct(Product itemProduct) {
 		this.itemProduct = itemProduct;
+	}
+
+	public int getCartIndex() {
+		return cartIndex;
+	}
+
+	public void setCartIndex(int cartIndex) {
+		this.cartIndex = cartIndex;
 	}
 	
 	

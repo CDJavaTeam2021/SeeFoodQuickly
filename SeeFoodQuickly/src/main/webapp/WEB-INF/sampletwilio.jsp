@@ -18,7 +18,8 @@
 			<div class="col">
 				<h3>Twilio test page</h3>
 				<hr>
-				<form:form method="GET" action="api/v1/sms">
+				<form:form method="POST" action="api/v1/sms"
+					modelAttribute="user">
 					<p>
 						<form:label path="userName">Your Name:</form:label>
 						<form:input type="text" id="userName" path="userName" class="form-control" />
@@ -27,8 +28,8 @@
 						<form:label path="userPhone">Your phone number:</form:label>
 						<form:input type="text" id="userPhone" path="userPhone" class="form-control" />
 					</p>
-					<input type="hidden" id="jsonData" name="jsonData" />
-					<input type="submit" onClick="handleClick(thisObj, thisEvent);" value="Send SMS" />
+					<input type="hidden" id="smsRequest" name="smsRequest" />
+					<input type="submit" onClick="handleClick();" value="Send SMS" />
 				</form:form>
 			</div>
 		</div>
@@ -38,8 +39,11 @@
   function handleClick()
   {
 	// retrieve the form values
+	  alert("from handleClick");
 	  var userName = document.forms["jssond"]["userName"].value;
+	  alert("after userName");
 	  var userPhone = document.forms["jssond"]["userPhone"].value;
+	  alert(userPhone);
 	//create JSON
 	  var jsonObj = {
 	      "phoneNumber": userPhone,
@@ -47,8 +51,9 @@
 	  };
 	  // convert JSON to string
 	  var jsonString = JSON.stringify(jsonObj);
+	  alert(jsonString);
 	  // put jsonString into hidden form field
-	  document.getElementById('jsonData').value = jsonString;
+	  document.getElementById('smsRequest').value = jsonString;
   }
 </script>
 </html>
