@@ -22,12 +22,16 @@ public class PaymentController {
     @Value("pk_test_51JkGb9LiLrBml3YZDf9jKApvu5SDJnA3DMAnJYWNnNMLVAt2kygpBCM6GQtJXnILH0k68HMl8Uv86Mx7TaXt3wtS00AIvnnaWm")
     private String stripePublicKey;
 
-    @RequestMapping("/testpayment")  //Change routing away from root address S.YEE
+
+    @RequestMapping("/homeTest")
+
     public String home(Model model) {
         model.addAttribute("amount", 50 * 100); // In cents
         model.addAttribute("stripePublicKey", stripePublicKey);
         return "testJSP/testPayment.jsp"; //Changed to test .JSP S.YEE
     }
+    
+    
     @Autowired
     private StripeService stripeService;
 
