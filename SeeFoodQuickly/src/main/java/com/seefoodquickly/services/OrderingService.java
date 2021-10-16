@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.seefoodquickly.models.Item;
 import com.seefoodquickly.models.Order;
+import com.seefoodquickly.models.Product;
 import com.seefoodquickly.repositories.ItemRepository;
 import com.seefoodquickly.repositories.OrderRepository;
 import com.seefoodquickly.repositories.ProductRepository;
@@ -35,9 +36,106 @@ public class OrderingService {
 	
 	//Product Methods
 	
+	//For new products using an MVC form
+	public void saveProduct(Product product) {
+		pRepo.save(product);
+	}
+	
+	//for editing a product using a standard HTML Form
+	//Since HTML forms send data back as Strings, this method
+	//accepts the id as a String and converts it to a Long to 
+	//access the Product in the database
+	//Other attributes accepted as String and converted to applicable data types
+	public void editProduct(String productIdStr, 
+			String itemName, 
+			String description, 
+			String priceStr, 
+			String makeMinutesStr) {
+		Long productId = Long.valueOf(productIdStr);
+		Product product = pRepo.findById(productId).get(); //assumes Id is always going to be valid
+		product.setItemName(itemName);
+		product.setDescription(description);
+		product.setPrice(Float.valueOf(priceStr));
+		product.setMakeMinutes(Integer.valueOf(makeMinutesStr));
+		pRepo.save(product);
+	}
+	
+	
+	public List<Product> getAllProducts(){
+		return (List<Product>) pRepo.findAll();
+	}
+	
+	public Product getProductById(Long id) {
+		return pRepo.findById(id).get();
+	}
+	
+	//accepts ID as string assuming it's coming from
+	//an HTML form
+	public void deleteProduct(String productIdStr) {
+		Long productId = Long.valueOf(productIdStr);
+		Product product = pRepo.findById(productId).get(); //assumes ID is automatically valid
+		pRepo.delete(product);
+	}
+	
+	//overloaded delete method that accepts the Product
+	public void deleteProduct(Product product) {
+		pRepo.delete(product);
+	}
 	
 	
 	//Item Methods
+	
+	//saves item assuming MVC form is used
+	public void saveItem(Item item) {
+		iRepo.save(item);
+	}
+	
+	
+	public void removeFromCart(String cartIndexStr, HttpSession session) {
+		int cartIndex = Integer.valueOf(cartIndexStr);
+		List<Item> cart = (List<Item>) session.getAttribute("myCart");
+		cart.remove(cartIndex);
+	}
+	
+	//Assumes the only functionality needed is to change quantity
+		public void updateQty(String cartIndexStr, String newQtyStr, HttpSession session) {
+			Integer cartIndex = Integer.valueOf(cartIndexStr);
+			int newQty = Integer.valueOf(newQtyStr);
+			List<Item> myCart = (List<Item>) session.getAttribute("myCart");
+			Item item = myCart.get(cartIndex);
+			item.setQuantity(newQty);
+			myCart.set(cartIndex, item);
+			session.setAttribute("myCart", myCart);
+		}
+	
+	//accepts fields as Strings and converts as necessary
+	public void addItemToCart(HttpSession session, 
+			String prodIdS,  
+			String quantityS) {
+		
+		//converting String inputs into appropriate data types
+		int quantity = Integer.valueOf(quantityS);
+		Long prodId = Long.valueOf(prodIdS);
+		
+		//instantiating and populating item with data
+		Item newItem = new Item();
+		newItem.setItemProduct(getProductById(prodId));
+		newItem.setQuantity(quantity);
+		float cost = getProductById(prodId).getPrice();
+		cost *= quantity;
+		newItem.setLineTotal(cost);
+		
+		//Adding item to cart
+		List<Item> cart = (List<Item>) session.getAttribute("myCart");
+		int cartIndex = cart.size();
+		newItem.setCartIndex(cartIndex);
+		cart.add(newItem);
+		session.setAttribute("myCart", cart);
+		float total = (float) session.getAttribute("cartTotal");
+		total += cost;
+		session.setAttribute("cartTotal", total);		
+	}
+
 	
 	
 	//Order Methods
