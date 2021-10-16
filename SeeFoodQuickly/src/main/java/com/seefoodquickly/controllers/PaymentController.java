@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.seefoodquickly.services.StripeService;
 
@@ -20,11 +22,13 @@ public class PaymentController {
     @Value("pk_test_51JkGb9LiLrBml3YZDf9jKApvu5SDJnA3DMAnJYWNnNMLVAt2kygpBCM6GQtJXnILH0k68HMl8Uv86Mx7TaXt3wtS00AIvnnaWm")
     private String stripePublicKey;
 
+
     @RequestMapping("/homeTest")
+
     public String home(Model model) {
         model.addAttribute("amount", 50 * 100); // In cents
         model.addAttribute("stripePublicKey", stripePublicKey);
-        return "index";
+        return "testJSP/testPayment.jsp"; //Changed to test .JSP S.YEE
     }
     
     
@@ -32,10 +36,13 @@ public class PaymentController {
     private StripeService stripeService;
 
     @RequestMapping(value = "/charge", method = RequestMethod.POST)
-    public String chargeCard(HttpServletRequest request) throws Exception {
+    public String chargeCard(HttpServletRequest request, RedirectAttributes redAttr) throws Exception {
         String token = request.getParameter("stripeToken");
         Double amount = Double.parseDouble(request.getParameter("amount"));
-        stripeService.chargeNewCard(token, amount);
-        return "result";
+        //stripeService.chargeNewCard(token, amount);    //Commented out...not sure if it'll actually charge a card! S.YEE
+        System.out.println("Test payment submitted");
+        redAttr.addFlashAttribute("message", "Thank you for your payment of $" + amount);   //Nice confirmation message S. YEE
+        return "redirect:/testpayment";
     }
+    
 }
