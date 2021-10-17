@@ -13,7 +13,12 @@ public class Service {
         this.smsSender = smsSender;
     }
 
-    public void sendSms(SmsRequest smsRequest) {
-        smsSender.sendSms(smsRequest);
+//    public void sendSms(SmsRequest smsRequest) {
+//        smsSender.sendSms(smsRequest);
+//    }
+    
+    public void sendSms(String phoneNumber, String message) {
+        smsSender.sendSms(phoneNumber, message);
     }
+
 }
