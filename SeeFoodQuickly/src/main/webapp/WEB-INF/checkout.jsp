@@ -41,6 +41,16 @@
 	</div>
 	
 	<div class="content">
+		<div class="contentHeader">
+		</div>
+		<div class="formPad">
+		<h5>Please Submit Payment</h5>
+		<hr>
+<!-- 							CREDIT CARD PROCESSING
+ -->		
+		</div>
+		<div class="contentFooter">
+		</div>
 	</div>
 	
 	<div class ="footer">

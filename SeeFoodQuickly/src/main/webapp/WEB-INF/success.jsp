@@ -38,12 +38,15 @@
 		      	</div>
 		  </div>
 		</nav>
-	</div>      	</div>
-		  </div>
-		</nav>
-	</div>
+	</div>  
 	
 	<div class="content">
+		<div class="contentHeader">
+		</div>
+		<div class="contentBody">
+		</div>
+		<div class="contentFooter">
+		</div>
 	</div>
 	
 	<div class ="footer">

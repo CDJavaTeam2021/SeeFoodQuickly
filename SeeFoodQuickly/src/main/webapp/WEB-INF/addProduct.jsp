@@ -39,36 +39,49 @@
 		  </div>
 		</nav>
 	</div>
-
-			<div class="content">
-				<form:form action="/products/new" method="post"
-					modelAttribute="newProduct">
-					<p>
-						<form:label path="itemName">Product Name</form:label>
-						<form:errors path="itemName" />
-						<form:input path="itemName" />
-					</p>
-					<p>
-						<form:label path="description">Description</form:label>
-						<form:errors path="description" />
-						<form:textarea path="description" />
-					</p>
-					<p>
-						<form:label path="price">Price</form:label>
-						<form:errors path="price" />
-						<form:input path="price" type="number" min="0.01" step="0.01" />
-					</p>
-					<p>
-						<form:label path="makeMinutes">Time to Make in Minutes:</form:label>
-						<form:errors path="makeMinutes" />
-						<form:input path="makeMinutes" type="number" min="1" step=".5" />
-					</p>
-					<form:button>Save Item!</form:button>
-
-				</form:form>
+	
+	<div class="content">
+		<div class="contentHeader">
+			<h1>New Menu Item:</h1>
+		</div>
+		<p>
+			<form:errors path="product.*" />
+		</p>
+		<div class="reg_form">
+		<form:form method="POST" action="/addProduct" modelAttribute="product">
+			<div class="formPad" style="">
+				<p>
+					<form:label path="itemName">Item Name:</form:label>
+					<form:input type="text" path="itemName" class="form-control" style="width:200px"/>
+				</p>
+				<p>
+					<form:label path="description">Description:</form:label>
+					<form:textarea type="text" path="description" class="form-control" style="width:300px"/>
+				</p>
+				<p>
+					<form:label path="makeMinutes">Cook Time:</form:label>
+					<form:select path="makeMinutes" style="width:200px" class="form-select">
+						<form:option value="5">5 Minutes</form:option>
+						<form:option value="10">10 Minutes</form:option>
+						<form:option value="15">15 Minutes</form:option>
+						<form:option value="20">20 Minutes</form:option>
+						<form:option value="25">25 Minutes</form:option>
+						<form:option value="30">30 Minutes</form:option>
+					</form:select>	
+				</p>
+				<p>
+					<form:label path="price">Price: $</form:label>
+					<form:input type="float" path="price" class="form-control" style="width:100px"/>
+				</p>
+				
+				
 			</div>
-
-			<div class ="footer">
+			<button type="submit" style="margin-left:110px; margin-top:20px;">Add New Item</button>
+		</form:form>
+		</div>
+	</div>
+	
+	<div class ="footer">
 		<img alt="logo" src="images/octopusLogo.png" class="headerLogo">
 	</div>
 </div>

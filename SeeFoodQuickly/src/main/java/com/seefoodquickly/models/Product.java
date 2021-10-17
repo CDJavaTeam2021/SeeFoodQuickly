@@ -10,9 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -130,6 +127,14 @@ public class Product {
 	}
 
 	public void setItems(List<Item> items) {
+		this.items = items;
+	}
+
+	public Product(String itemName, String description, float price, int makeMinutes, List<Item> items) {
+		this.itemName = itemName;
+		this.description = description;
+		this.price = price;
+		this.makeMinutes = makeMinutes;
 		this.items = items;
 	}
 	
