@@ -13,11 +13,11 @@ public class TwilioInitializer {
 	private final static Logger LOGGER = (Logger) LoggerFactory.getLogger(TwilioInitializer.class);
 	private final TwilioConfiguration twilioConfiguration;
 	
+	
 	@Autowired
 	public TwilioInitializer(TwilioConfiguration twilioConfiguration) {
 		this.twilioConfiguration = twilioConfiguration;
-		System.out.println(twilioConfiguration.getAccountSid());
-		System.out.println(twilioConfiguration.getAuthToken());
+
 		Twilio.init(
 				twilioConfiguration.getAccountSid(),
 				twilioConfiguration.getAuthToken()

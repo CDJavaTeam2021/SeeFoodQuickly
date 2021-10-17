@@ -21,7 +21,8 @@ public class Controller {
 
     @PostMapping
     public void sendSms(@Valid @RequestBody SmsRequest smsRequest) {
-        service.sendSms(smsRequest);
+        System.out.println(smsRequest);
+    	service.sendSms(smsRequest);
     }
 
 }
