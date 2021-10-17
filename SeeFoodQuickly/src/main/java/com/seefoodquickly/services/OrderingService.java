@@ -153,6 +153,7 @@ public class OrderingService {
 		cost *= quantity;
 		newItem.setLineTotal(cost);
 		
+		
 		System.out.println("New Item Populated");
 		
 		//Adding item to cart
@@ -168,8 +169,7 @@ public class OrderingService {
 		float total = (float) session.getAttribute("cartTotal");
 		total += cost;
 		session.setAttribute("cartTotal", total);	
-		
-	}
+			}
 
 	
 	

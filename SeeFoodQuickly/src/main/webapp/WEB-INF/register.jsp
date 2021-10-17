@@ -49,7 +49,7 @@
 		</p>
 		<div class="reg_form">
 		<form:form method="POST" action="/register" modelAttribute="user">
-			<div class="registerPad">
+			<div class="formPad">
 				<p>
 					<form:label path="userName">Name:</form:label>
 					<form:input type="text" path="userName" class="form-control" style="width:200px"/>

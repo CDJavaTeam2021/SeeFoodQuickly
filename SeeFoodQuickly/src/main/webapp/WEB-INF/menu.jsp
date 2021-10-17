@@ -52,6 +52,8 @@
   					<div class="card-body" style="display:flex; flex-direction:column; align-items: center">
    						 <h6 class="card-title"> <c:out value="${product.itemName}"/> </h6>
     					 <p class="card-text" style="font-size: small;"> <c:out value="${product.description}"/></p>
+    					 
+    					 
    						 <form action="/addItemToCart/${product.id}" method="POST">
    						 	<label style="font-size: small;">Choose Amount:</label>
    						 	<select name="quantity" class="form-select" aria-label="Default select example" style="width:75px; font-size: small;">
