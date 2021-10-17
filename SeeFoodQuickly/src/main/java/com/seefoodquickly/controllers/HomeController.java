@@ -90,7 +90,7 @@ public class HomeController {
 			User loggedUser = this.uServ.findUserById(userId);
 			model.addAttribute("loggedUser", loggedUser);
 			
-			List<Product> allProducts = pServ.getAllProducts();
+			List<Product> allProducts = oServ.getAllProducts();
 			model.addAttribute("allProducts", allProducts);
 			
 			return "menu.jsp";
@@ -164,7 +164,9 @@ public class HomeController {
 	
 	//Add Product JSP
 	@GetMapping("/addProduct")
+
 	public String addProduct(@ModelAttribute("product") Product product, Model model, HttpSession session) {
+
 			if(session.getAttribute("userId")==null) {
 				return "redirect:/";
 			} else {
@@ -177,6 +179,13 @@ public class HomeController {
 				return "addProduct.jsp";
 			}
 		}
+	
+	//Remove from cart
+	@GetMapping("/remove/{item_index}")
+	public String removeItem(@PathVariable("item_index") String indexStr, HttpSession session) {
+		oServ.removeFromCart(indexStr, session);
+		return "redirect:/cart";
+	}
 	
 	
 	
@@ -216,7 +225,7 @@ public class HomeController {
 	// Create Product
 	@PostMapping("/addProduct")
 	public String addProduct(@Valid @ModelAttribute("product") Product product, BindingResult result) {
-			pServ.createProduct(product);
+			oServ.saveProduct(product);
 		return "redirect:/menu";
 	}
 	
@@ -226,6 +235,8 @@ public class HomeController {
 		this.oServ.addItemToCart(session, id, quantity);
 		return "redirect:/menu";
 	}
+	
+	
 	
 	
 	///////////////////////////////////////////////  UTILITIES  //////////////////////////////////////////

@@ -13,7 +13,7 @@ import com.stripe.model.Charge;
 @Service
 public class StripeService {
 
-    @Value("sk_test_51JkGb9LiLrBml3YZ5PYRgJLaXWGpq6tB3Llmrzhjwgf3F3x5Z1sUe2vcJ3dzVxJ30HblSX3Sdnj4aEXsffVjGMeY00PgPTPOI6")
+    @Value("${STRIPE_SECRET_KEY}")
     private String API_SECRET_KEY;
 
     @Autowired
