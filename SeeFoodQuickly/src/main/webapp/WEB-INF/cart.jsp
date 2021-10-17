@@ -63,8 +63,7 @@
 						<td>${item.itemProduct.itemName }</td>
 						<td>${item.quantity }</td>
 						<td>$${item.lineTotal }</td>
-<%-- 						<td><a href="/remove/${item.cartIndex}">Remove ${item.cartIndex}</a></td> --%>
-						<td>REMOVE</td>
+ 						<td><a href="/remove/${item.cartIndex}">Remove</a></td>
 					</tr>
 				</c:forEach>
 				</tbody>
