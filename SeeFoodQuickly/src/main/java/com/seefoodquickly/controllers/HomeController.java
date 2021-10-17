@@ -232,11 +232,18 @@ public class HomeController {
 		return "redirect:/menu";
 	}
 	
-	
+	//Remove Item from Cart
+		@GetMapping("remove/{cartIndex}")
+		public String removeItem(@PathVariable("cartIndex") String index, HttpSession session) {
+			oServ.removeFromCart(index, session);
+			return "redirect:/cart";
+		}
 	
 	
 	///////////////////////////////////////////////  UTILITIES  //////////////////////////////////////////
 
+
+	
 	
 	//Logout
 	@GetMapping("/logout")
