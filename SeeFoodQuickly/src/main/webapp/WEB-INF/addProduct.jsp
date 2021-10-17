@@ -39,11 +39,36 @@
 		  </div>
 		</nav>
 	</div>
-	
-	<div class="content">
-	</div>
-	
-	<div class ="footer">
+
+			<div class="content">
+				<form:form action="/products/new" method="post"
+					modelAttribute="newProduct">
+					<p>
+						<form:label path="itemName">Product Name</form:label>
+						<form:errors path="itemName" />
+						<form:input path="itemName" />
+					</p>
+					<p>
+						<form:label path="description">Description</form:label>
+						<form:errors path="description" />
+						<form:textarea path="description" />
+					</p>
+					<p>
+						<form:label path="price">Price</form:label>
+						<form:errors path="price" />
+						<form:input path="price" type="number" min="0.01" step="0.01" />
+					</p>
+					<p>
+						<form:label path="makeMinutes">Time to Make in Minutes:</form:label>
+						<form:errors path="makeMinutes" />
+						<form:input path="makeMinutes" type="number" min="1" step=".5" />
+					</p>
+					<form:button>Save Item!</form:button>
+
+				</form:form>
+			</div>
+
+			<div class ="footer">
 		<img alt="logo" src="images/octopusLogo.png" class="headerLogo">
 	</div>
 </div>

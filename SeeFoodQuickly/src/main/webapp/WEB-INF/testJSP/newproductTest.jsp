@@ -42,10 +42,35 @@
 	
 	<div class="content">
 		<div class="contentHeader">
-			<h1>Menu:</h1>
+			<h1>New Product</h1>
 		</div>
 		<div class="contentBody">
-		</div>
+					<form:form action="/products/new" method="post" modelAttribute="newProduct">
+						<p>
+							<form:label path="itemName">Product Name</form:label>
+							<form:errors path="itemName" />
+							<form:input path="itemName" />
+						</p>
+						<p>
+							<form:label path="description">Description</form:label>
+							<form:errors path="description" />
+							<form:textarea path="description"/>
+						</p>
+						<p>
+							<form:label path="price">Price</form:label>
+							<form:errors path="price" />
+							<form:input path="price" type="number" min="0.01" step="0.01"/>
+						</p>
+						<p>
+							<form:label path="makeMinutes">Time to Make in Minutes:</form:label>
+							<form:errors path="makeMinutes" />
+							<form:input path="makeMinutes" type="number" min="1" step=".5"/>
+						</p>
+						<form:button>Save Item!</form:button>
+
+					</form:form>
+
+				</div>
 		<div class="contentFooter">
 		<h3><a href="/cart">Proceed to cart</a></h3>	 
 		</div>

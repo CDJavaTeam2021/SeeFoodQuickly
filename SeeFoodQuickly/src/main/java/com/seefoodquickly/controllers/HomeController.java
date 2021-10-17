@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.seefoodquickly.models.Product;
 import com.seefoodquickly.models.User;
 import com.seefoodquickly.services.UserService;
 import com.seefoodquickly.validators.UserValidator;
@@ -147,7 +148,9 @@ public class HomeController {
 	
 	//Add Product JSP
 	@GetMapping("/addProduct")
-	public String addProduct(Model model, HttpSession session) {
+	public String addProduct(@ModelAttribute("newProduct") Product newProduct, 
+			Model model, 
+			HttpSession session) {
 			if(session.getAttribute("userId")==null) {
 				return "redirect:/";
 			} else {
