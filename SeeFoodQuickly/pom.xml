@@ -62,15 +62,37 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- Following dependency is for websockets -->
+		<!-- Following dependency is for BootStrap James -->
+		<dependency>
+	        	<groupId>org.webjars</groupId>
+	        	<artifactId>bootstrap</artifactId>
+	       		<version>5.0.1</version>
+		</dependency>
+		<dependency>
+	        	<groupId>org.webjars</groupId>
+	       		<artifactId>jquery</artifactId>
+	        	<version>3.6.0</version>
+		</dependency>
+		<dependency>
+	        	<groupId>org.webjars</groupId>
+	        	<artifactId>webjars-locator</artifactId>
+	        	<version>0.30</version>
+		</dependency>
+		<!-- Following dependency is for websockets Chet -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
-		<!-- Following dependency is for STOMP Broker Relay -->
+		<!-- Following dependency is for STOMP Broker Relay Chet -->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-reactor-netty</artifactId>
+		</dependency>
+		<!-- Following dependency for Twilio Chet -->
+		<dependency>
+		  <groupId>com.twilio.sdk</groupId>
+		  <artifactId>twilio</artifactId>
+		  <version>8.20.0</version>
 		</dependency>
 		<dependency>
     <groupId>com.stripe</groupId>
