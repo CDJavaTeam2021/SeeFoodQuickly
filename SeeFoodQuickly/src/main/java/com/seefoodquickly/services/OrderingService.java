@@ -139,6 +139,20 @@ public class OrderingService {
 	
 	
 	//Order Methods
+	
+	//find by ID where ID is provided as a String
+	public Order findOrderById(String orderIdStr) {
+		Long orderId = Long.valueOf(orderIdStr);
+		Order order = oRepo.findById(orderId).get();
+		return order;
+	}
+	
+	//overloaded to accept order ID as a Long
+	public Order findOrderById(Long orderId) {
+		Order order = oRepo.findById(orderId).get();
+		return order;
+	}
+	
 	public List<Order> getAllOrders() {
 		return (List<Order>) oRepo.findAll();
 	}
