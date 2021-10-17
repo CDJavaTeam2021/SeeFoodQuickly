@@ -18,7 +18,7 @@
 			<div class="col">
 				<h3>Twilio test page</h3>
 				<hr>
-				<form:form method="POST" action="api/v1/sms"
+				<!--<form:form method="POST" action="api/v1/sms"
 					modelAttribute="user">
 					<p>
 						<form:label path="userName">Your Name:</form:label>
@@ -28,9 +28,18 @@
 						<form:label path="userPhone">Your phone number:</form:label>
 						<form:input type="text" id="userPhone" path="userPhone" class="form-control" />
 					</p>
-					<input type="hidden" id="smsRequest" name="smsRequest" />
+					<input type="hidden" id="phoneNumber" name="phoneNumber" />
+					<input type="hidden" id="message" name="message" />
 					<input type="submit" onClick="handleClick();" value="Send SMS" />
-				</form:form>
+				</form:form> -->
+				
+				<form method="post" action="api/v1/sms">
+					<input name="userName" id="userName">
+					<input name="userPhone" id="userPhone">
+					<input type="hidden" id="phoneNumber" name="phoneNumber" />
+					<input type="hidden" id="message" name="message" />
+					<button onClick="handleClick();">Test</button>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -39,21 +48,18 @@
   function handleClick()
   {
 	// retrieve the form values
-	  alert("from handleClick");
-	  var userName = document.forms["jssond"]["userName"].value;
-	  alert("after userName");
-	  var userPhone = document.forms["jssond"]["userPhone"].value;
-	  alert(userPhone);
-	//create JSON
+	  var userName = document.getElementById("userName").value;
+	  var userPhone = document.getElementById("userPhone").value;
+	//create JSON for SMS message
 	  var jsonObj = {
-	      "phoneNumber": userPhone,
-	      "message": "Hi " + userName + ", your order is ready!"
+	      "phoneNumber" : userPhone,
+	      "message" : "Hi " + userName + ", your order is ready!"
 	  };
 	  // convert JSON to string
 	  var jsonString = JSON.stringify(jsonObj);
-	  alert(jsonString);
 	  // put jsonString into hidden form field
-	  document.getElementById('smsRequest').value = jsonString;
+	  document.getElementById('phoneNumber').value = userPhone;
+	  document.getElementById('message').value = "Hi " + userName + ", your order is ready!";
   }
 </script>
 </html>
