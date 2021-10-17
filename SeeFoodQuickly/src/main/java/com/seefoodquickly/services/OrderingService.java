@@ -127,6 +127,10 @@ public class OrderingService {
 		System.out.println("New Item Populated");
 		
 		//Adding item to cart
+		if(session.getAttribute("myCart") == null) {
+			List<Item> emptyCart = new ArrayList<Item>();
+			session.setAttribute("myCart", emptyCart);
+		}
 		List<Item> myCart = (List<Item>) session.getAttribute("myCart");
 		int cartIndex = myCart.size();
 		newItem.setCartIndex(cartIndex);
@@ -135,6 +139,12 @@ public class OrderingService {
 		float total = (float) session.getAttribute("cartTotal");
 		total += cost;
 		session.setAttribute("cartTotal", total);
+		
+		//debug prints
+		for(Item item : (List<Item>)session.getAttribute("myCart")) {
+			System.out.println(item.getItemProduct().getItemName() + " " + item.getQuantity() + " " + item.getLineTotal());
+			
+		}
 		
 		
 		
