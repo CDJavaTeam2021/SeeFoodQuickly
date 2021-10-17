@@ -11,13 +11,16 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.seefoodquickly.models.Item;
 import com.seefoodquickly.models.Product;
 import com.seefoodquickly.models.User;
 import com.seefoodquickly.services.OrderingService;
+import com.seefoodquickly.services.ProductService;
 import com.seefoodquickly.services.UserService;
 import com.seefoodquickly.validators.UserValidator;
 
@@ -31,6 +34,9 @@ public class HomeController {
 	UserValidator uVal;
 	
 	@Autowired
+	ProductService pServ;
+	
+	@Autowired
 	OrderingService oServ;
 
 	@GetMapping("/") // Initial Router
@@ -42,6 +48,9 @@ public class HomeController {
 			return "redirect:/menu";
 		}
 	}
+	
+	
+	
 	
 	///////////////////////////////////////////////  GET REQUESTS  //////////////////////////////////////////
 	
@@ -205,10 +214,18 @@ public class HomeController {
 		}		
 	}
 	
-	// Add Product
+	
+	// Create Product
 	@PostMapping("/addProduct")
 	public String addProduct(@Valid @ModelAttribute("product") Product product, BindingResult result) {
 			oServ.saveProduct(product);
+		return "redirect:/menu";
+	}
+	
+	// Add to Cart
+	@PostMapping("/addItemToCart/{id}")
+	public String addToCart(@PathVariable("id")Long id, @RequestParam("quantity") String quantity, HttpSession session) {
+		this.oServ.addItemToCart(session, id, quantity);
 		return "redirect:/menu";
 	}
 	

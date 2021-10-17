@@ -32,7 +32,8 @@
 			        <a class="nav-link" href="/addProduct">Add Product</a>
 			      </div>
 			      <div class="navbar-nav" style="align-content: flex-end;">
-			       	<a class="nav-link">Signed in as: ${sessionScope.userName }</a>
+
+			       	<a class="nav-link"><c:out value="${loggedUser.userName}" /></a>
 			        <a class="nav-link" href="/logout">Logout</a>
 			      </div>
 		      	</div>
@@ -68,6 +69,8 @@
 							<br>
 							<button type="submit" style="font-size: small">Add To Cart</button>
    						 </form>
+
+   						 
   					</div>
 				</div>
 			</c:forEach>
