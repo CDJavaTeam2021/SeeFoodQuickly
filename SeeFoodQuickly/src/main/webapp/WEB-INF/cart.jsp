@@ -60,10 +60,10 @@
 				<tbody>
 				<c:forEach items="${sessionScope.myCart}" var="item">
 					<tr>
-						<td>${item.itemProduct.itemName}</td>
-						<td>${item.quantity}</td>
-						<td>$${item.lineTotal}</td>
-						<td>REMOVE</td>
+						<td>${item.itemProduct.itemName }</td>
+						<td>${item.quantity }</td>
+						<td>$${item.lineTotal }</td>
+ 						<td><a href="/remove/${item.cartIndex}">Remove</a></td>
 					</tr>
 				</c:forEach>
 				</tbody>

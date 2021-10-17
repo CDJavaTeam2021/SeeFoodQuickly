@@ -90,23 +90,52 @@ public class OrderingService {
 		iRepo.save(item);
 	}
 	
-	
+	//Remove an item from the cart, reset the indexes and lower cart total
 	public void removeFromCart(String cartIndexStr, HttpSession session) {
 		int cartIndex = Integer.valueOf(cartIndexStr);
 		List<Item> cart = (List<Item>) session.getAttribute("myCart");
+		float cost = cart.get(cartIndex).getLineTotal();
+		float total = (float) session.getAttribute("cartTotal");
+		total -= cost;
+		session.setAttribute("cartTotal", total);
 		cart.remove(cartIndex);
+		resetCart(session);
+	}
+	
+	//Reset Cart Data
+	public void resetCart(HttpSession session) {
+		if(session.getAttribute("myCart") == null) {
+			List<Item> emptyCart = new ArrayList<Item>();
+			session.setAttribute("myCart", emptyCart);
+			session.setAttribute("cartTotal", 0f);
+		} else {
+			List<Item> cart = (List<Item>) session.getAttribute("myCart");
+			Float newTotal = 0f;
+			for(int i = 0; i < cart.size(); i++) {
+				cart.get(i).setCartIndex(i);
+				newTotal += cart.get(i).getLineTotal();
+			}
+			session.setAttribute("cartTotal", newTotal);
+		}
+		
 	}
 	
 	//Assumes the only functionality needed is to change quantity
-		public void updateQty(String cartIndexStr, String newQtyStr, HttpSession session) {
+	public void updateQty(String cartIndexStr, String newQtyStr, HttpSession session) {
+		if(Integer.valueOf(newQtyStr) == 0) {
+			removeFromCart(cartIndexStr, session);			
+		} else {
 			Integer cartIndex = Integer.valueOf(cartIndexStr);
 			int newQty = Integer.valueOf(newQtyStr);
 			List<Item> myCart = (List<Item>) session.getAttribute("myCart");
 			Item item = myCart.get(cartIndex);
 			item.setQuantity(newQty);
+			item.setLineTotal(newQty * item.getItemProduct().getPrice());
 			myCart.set(cartIndex, item);
 			session.setAttribute("myCart", myCart);
+			resetCart(session);
 		}
+	}
 	
 	//accepts fields as Strings and converts as necessary
 	public void addItemToCart(HttpSession session, 

@@ -108,6 +108,7 @@ public class HomeController {
 			Long userId = (Long)session.getAttribute("userId");
 			User loggedUser = this.uServ.findUserById(userId);
 			model.addAttribute("loggedUser", loggedUser);
+
 			
 			Date newDate = new Date();
 			model.addAttribute("currentDate", newDate);
