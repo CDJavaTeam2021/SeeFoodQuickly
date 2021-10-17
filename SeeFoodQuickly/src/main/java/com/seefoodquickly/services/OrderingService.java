@@ -200,12 +200,14 @@ public class OrderingService {
 	
 	//Method takes in session to determine who is ordering and takes in orderEmail and orderPhone
 	//in case User wants to override default contact
-	public Order checkout(HttpSession session, String orderEmail, String orderPhone) {
+	public Order checkout(HttpSession session) {
 		
 		Order order = new Order();
 		List<Item> newItems = (List<Item>) session.getAttribute("myCart");
 		order.setItems(newItems);
-		order.setTotal((float) session.getAttribute("cartTotal"));
+		order.setSubtotal((float) session.getAttribute("cartTotal"));
+		order.setTax((float) (order.getSubtotal()*.0925));
+		order.setTotal(((float)(order.getSubtotal()*1.0925)));
 		oRepo.save(order);
 		for(Item item : newItems) {
 			item.setParentOrder(order);
@@ -225,8 +227,8 @@ public class OrderingService {
 		order.setOrderNumber(orderNumber);
 		
 		// add contact info from customer
-		order.setOrderEmail(orderEmail);
-		order.setOrderPhone(orderPhone);
+		order.setOrderEmail((String)session.getAttribute("myEmail"));
+		order.setOrderPhone((String)session.getAttribute("myPhone"));
 		// 
 				
 		order.setOrderOpen(true);

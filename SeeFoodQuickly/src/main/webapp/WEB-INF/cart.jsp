@@ -74,7 +74,11 @@
 			<h6>Taxes: $<c:out value="${sessionScope.cartTotal * .0925}"/></h6>
 			<hr>
 			<h5>Total Charge: $ <c:out value="${sessionScope.cartTotal * 1.0925}"/></h5>
-			
+			<form action="/update/contact" method="post">
+				<label for="myPhone">Confirm Phone:</label>
+				<input id="myPhone" name="myPhone" value="${sessionScope.myPhone}">
+				<button>Update</button>
+			</form>
 			
 			
 		</div>

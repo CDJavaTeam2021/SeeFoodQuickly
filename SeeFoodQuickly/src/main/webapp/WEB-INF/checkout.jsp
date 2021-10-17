@@ -42,14 +42,37 @@
 	
 	<div class="content">
 		<div class="contentHeader">
+			
 		</div>
-		<div class="formPad">
-		<h5>Please Submit Payment</h5>
-		<hr>
-<!-- 							CREDIT CARD PROCESSING
- -->		
-		</div>
-		<div class="contentFooter">
+				<div class="formPad">
+					<h3>Your Items:</h3>
+					<table>
+						<c:forEach items="${sessionScope.myCart}" var="item">
+							<tr>
+								<td>${item.quantity } x </td>
+								<td>${item.itemProduct.description }</td>
+								<td>$${item.lineTotal }</td>
+							</tr>
+						</c:forEach>
+					</table>
+					<hr>
+					<h6>Sub Total: $ ${sessionScope.cartTotal}</h6>
+					<h6>
+						Taxes: $<c:out value="${sessionScope.cartTotal * .0925}" />
+					</h6>
+					<hr>
+					<h5>
+						Total Charge: $<c:out value="${sessionScope.cartTotal * 1.0925}" />
+					</h5>
+					<h5>Please Submit Payment</h5>
+					<hr>
+					<!-- 							CREDIT CARD PROCESSING
+ -->
+				<form action="/checkout" method="post">
+					<button>Order Submit [TEST]</button>
+				</form>
+				</div>
+				<div class="contentFooter">
 		</div>
 	</div>
 	
