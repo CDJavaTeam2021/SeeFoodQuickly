@@ -79,7 +79,7 @@
 			
 		</div>
 		<div class="contentFooter">
-		<a href="/checkout">Proceed To Checkout</a>
+		<a href="/checkout/{id}">Proceed To Checkout</a>
 		</div>
 	</div>
 	
