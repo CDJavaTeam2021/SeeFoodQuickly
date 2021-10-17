@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.seefoodquickly.models.Order;
 import com.seefoodquickly.models.Product;
 import com.seefoodquickly.models.User;
 import com.seefoodquickly.services.OrderingService;
@@ -105,10 +106,11 @@ public class HomeController {
 		if(session.getAttribute("userId")==null) {
 			return "redirect:/";
 		} else {
+			oServ.resetCart(session);
 			Long userId = (Long)session.getAttribute("userId");
 			User loggedUser = this.uServ.findUserById(userId);
 			model.addAttribute("loggedUser", loggedUser);
-
+			oServ.resetCart(session);
 			
 			Date newDate = new Date();
 			model.addAttribute("currentDate", newDate);
@@ -134,16 +136,19 @@ public class HomeController {
 		}
 	}
 	
-	//Conformation JSP
-	@GetMapping("/success")
-	public String confirmation(Model model, HttpSession session) {
+	//Confirmation JSP
+	@GetMapping("/success/{orderNum}")
+	public String confirmation(Model model, 
+			HttpSession session, 
+			@PathVariable("orderNum") String orderIdStr) {
 		if(session.getAttribute("userId")==null) {
 			return "redirect:/";
 		} else {
 			Long userId = (Long)session.getAttribute("userId");
 			User loggedUser = this.uServ.findUserById(userId);
+			Order order = oServ.findOrderById(orderIdStr);
 			model.addAttribute("loggedUser", loggedUser);
-			
+			model.addAttribute("newOrder", order);
 			
 			
 			return "success.jsp";
@@ -236,6 +241,20 @@ public class HomeController {
 		@GetMapping("remove/{cartIndex}")
 		public String removeItem(@PathVariable("cartIndex") String index, HttpSession session) {
 			oServ.removeFromCart(index, session);
+			return "redirect:/cart";
+		}
+		
+	//Checkout and create new order
+		@PostMapping("/checkout")
+		public String newOrder(HttpSession session) {
+			Order order = oServ.checkout(session);
+			
+			return "redirect:/success/" +order.getId();
+		}
+		
+		@PostMapping("/update/contact")
+		public String updateContact(@RequestParam("myPhone") String newPhone, HttpSession session) {
+			session.setAttribute("myPhone", newPhone);
 			return "redirect:/cart";
 		}
 	

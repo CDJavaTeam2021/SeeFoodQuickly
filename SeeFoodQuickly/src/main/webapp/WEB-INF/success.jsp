@@ -46,7 +46,8 @@
 		</div>
 		<div class="successBody">
 		<h4 style="color:green">Success!  Your order has been placed!</h4>
-		<h6 style="color:green">A text message has been sent to: <c:out value="${loggedUser.userName}"/> at <c:out value="${loggedUser.userPhone}"/>.</h6>
+		<h5>Your order number is ${newOrder.orderNumber }</h5>
+		<h6 style="color:green">A text message has been sent to: <c:out value="${loggedUser.userName}"/> at <c:out value="${newOrder.orderPhone}"/>.</h6>
 		<br>
 		<a href="/orders"><button>Check Order Status</button></a>
 		</div>
