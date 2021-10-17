@@ -35,6 +35,25 @@
 	padding-top: 5px;
 }
 
+.contentBody{
+	height: 475px;
+	width: 75%;
+	background-color: white;
+	padding: 5px;
+	border-style:solid;
+	border-width: 3px; 
+	border-radius: 10px;
+	border-color: rgb(251, 205, 0);
+	-webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+	box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+	
+}
+
+.contentFooter{
+	margin-top:10px;
+	align-content: flex-end;
+}
+
 
 .navDivider{
 	display:flex;
@@ -74,7 +93,7 @@ button{
 
 						/* Registration JSP */
 						
-.registerPad{
+.formPad{
 	width: 350px;
 	height: 500px;
 	display:flex;
@@ -107,11 +126,17 @@ button{
 	padding: 5px;
 }
 
-.contentBody{
-	height: 475px;
+.menuBody{
+	height: 500px;
 	width: 75%;
+	
+	display:flex;
+	flex-wrap:wrap;
+	justify-content:space-between;
+	overflow-y:scroll;
 	background-color: white;
-	padding: 5px;
+	padding: 15px;
+	margin-bottom:10px;
 	border-style:solid;
 	border-width: 3px; 
 	border-radius: 10px;
@@ -121,10 +146,29 @@ button{
 	
 }
 
-.contentFooter{
-	margin-top:10px;
-	align-content: flex-end;
-}
+						/* Cart JSP */
+						
+.cartBody{
+	height: 500px;
+	width: 75%;
+	
+	display:flex;
+	flex-direction:column;
+	align-items:flex-start;
+	background-color: white;
+	padding: 15px;
+	margin-bottom:10px;
+	border-style:solid;
+	border-width: 3px; 
+	border-radius: 10px;
+	border-color: rgb(251, 205, 0);
+	-webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+	box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+	
+}				
+
+
+
 
 						
 						

@@ -44,7 +44,33 @@
 		<div class="contentHeader">
 			<h1>Menu:</h1>
 		</div>
-		<div class="contentBody">
+		<div class="menuBody">
+			<c:forEach items="${allProducts}" var="product">
+				<div class="card" style="width: 15rem; display:flex; flex-direction: column; padding:5px; align-items: center; height:300px; margin-bottom:15px; border-color:rgb(64, 194, 198);">
+  					<img src="images/productImage.png" class="card-img-top" alt="productImage" style="width:60px; height:60px">
+  					<div class="card-body" style="display:flex; flex-direction:column; align-items: center">
+   						 <h6 class="card-title"> <c:out value="${product.itemName}"/> </h6>
+    					 <p class="card-text" style="font-size: small;"> <c:out value="${product.description}"/></p>
+   						 <form action="/addItemToCart/${product.id}" method="POST">
+   						 	<label style="font-size: small;">Choose Amount:</label>
+   						 	<select name="quantity" class="form-select" aria-label="Default select example" style="width:75px; font-size: small;">
+							  <option value="1">1</option>
+							  <option value="2">2</option>
+							  <option value="3">3</option>
+							  <option value="4">4</option>
+							  <option value="5">5</option>
+							  <option value="6">6</option>
+							  <option value="7">7</option>
+							  <option value="8">8</option>
+							  <option value="9">9</option>
+							  <option value="10">10</option>
+							</select>
+							<br>
+							<button type="submit" style="font-size: small">Add To Cart</button>
+   						 </form>
+  					</div>
+				</div>
+			</c:forEach>
 		</div>
 		<div class="contentFooter">
 		<h3><a href="/cart">Proceed to cart</a></h3>	 
