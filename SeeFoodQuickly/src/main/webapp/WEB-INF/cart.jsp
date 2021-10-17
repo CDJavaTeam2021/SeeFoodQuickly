@@ -58,22 +58,23 @@
 					</tr>
 				</thead>
 				<tbody>
-				<%-- <c:forEach items="" var=""> --%>
+				<c:forEach items="${sessionScope.myCart }" var="item">
 					<tr>
-						<td></td>
-						<td></td>
-						<td>$</td>
-						<td><a>Remove</a></td>
+						<td>${item.itemProduct.itemName }</td>
+						<td>${item.quantity }</td>
+						<td>$${item.lineTotal }</td>
+<%-- 						<td><a href="/remove/${item.cartIndex}">Remove ${item.cartIndex}</a></td> --%>
+						<td>REMOVE</td>
 					</tr>
-				<%-- </c:forEach> --%>
+				</c:forEach>
 				</tbody>
 			</table>
 			
 			<br>
-			<h6>Sub Total: $ {{Sum}}</h6>
-			<h6>Taxes: $ {{Tax}}</h6>
+			<h6>Sub Total: $ ${sessionScope.cartTotal}</h6>
+			<h6>Taxes: $<c:out value="${sessionScope.cartTotal * .0925}"/></h6>
 			<hr>
-			<h5>Total Charge: $ {{Total Charge}}</h5>
+			<h5>Total Charge: $ <c:out value="${sessionScope.cartTotal * 1.0925}"/></h5>
 			
 			
 			

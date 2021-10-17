@@ -180,6 +180,13 @@ public class HomeController {
 			}
 		}
 	
+	//Remove from cart
+	@GetMapping("/remove/{item_index}")
+	public String removeItem(@PathVariable("item_index") String indexStr, HttpSession session) {
+		oServ.removeFromCart(indexStr, session);
+		return "redirect:/cart";
+	}
+	
 	
 	
 	///////////////////////////////////////////////  POST REQUESTS  //////////////////////////////////////////
@@ -228,6 +235,8 @@ public class HomeController {
 		this.oServ.addItemToCart(session, id, quantity);
 		return "redirect:/menu";
 	}
+	
+	
 	
 	
 	///////////////////////////////////////////////  UTILITIES  //////////////////////////////////////////

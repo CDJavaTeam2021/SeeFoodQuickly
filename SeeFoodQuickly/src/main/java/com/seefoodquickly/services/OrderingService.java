@@ -138,15 +138,7 @@ public class OrderingService {
 		session.setAttribute("myCart", myCart);
 		float total = (float) session.getAttribute("cartTotal");
 		total += cost;
-		session.setAttribute("cartTotal", total);
-		
-		//debug prints
-		for(Item item : (List<Item>)session.getAttribute("myCart")) {
-			System.out.println(item.getItemProduct().getItemName() + " " + item.getQuantity() + " " + item.getLineTotal());
-			
-		}
-		
-		
+		session.setAttribute("cartTotal", total);	
 		
 	}
 
