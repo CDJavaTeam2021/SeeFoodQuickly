@@ -41,6 +41,44 @@
 	</div>
 	
 	<div class="content">
+		<div class="contentHeader">
+			<h1>New Menu Item:</h1>
+		</div>
+		<p>
+			<form:errors path="product.*" />
+		</p>
+		<div class="reg_form">
+		<form:form method="POST" action="/addProduct" modelAttribute="product">
+			<div class="formPad" style="">
+				<p>
+					<form:label path="itemName">Item Name:</form:label>
+					<form:input type="text" path="itemName" class="form-control" style="width:200px"/>
+				</p>
+				<p>
+					<form:label path="description">Description:</form:label>
+					<form:textarea type="text" path="description" class="form-control" style="width:300px"/>
+				</p>
+				<p>
+					<form:label path="makeMinutes">Cook Time:</form:label>
+					<form:select path="makeMinutes" style="width:200px" class="form-select">
+						<form:option value="5">5 Minutes</form:option>
+						<form:option value="10">10 Minutes</form:option>
+						<form:option value="15">15 Minutes</form:option>
+						<form:option value="20">20 Minutes</form:option>
+						<form:option value="25">25 Minutes</form:option>
+						<form:option value="30">30 Minutes</form:option>
+					</form:select>	
+				</p>
+				<p>
+					<form:label path="price">Price: $</form:label>
+					<form:input type="float" path="price" class="form-control" style="width:100px"/>
+				</p>
+				
+				
+			</div>
+			<button type="submit" style="margin-left:110px; margin-top:20px;">Add New Item</button>
+		</form:form>
+		</div>
 	</div>
 	
 	<div class ="footer">

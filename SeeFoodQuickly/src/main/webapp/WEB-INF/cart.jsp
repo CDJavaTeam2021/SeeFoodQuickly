@@ -41,6 +41,46 @@
 	</div>
 	
 	<div class="content">
+		<div class="contentHeader">
+		</div>
+		<div class="cartBody">
+			<h4>Order for: {UserName}</h4>
+			<h6>Contact: {PhoneNumber}</h6>
+			<h6>Date: {CurrDate}</h6>
+			<br>
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>Item</th>
+						<th>Quantity</th>
+						<th>Charge</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+				<%-- <c:forEach items="" var=""> --%>
+					<tr>
+						<td></td>
+						<td></td>
+						<td>$</td>
+						<td><a>Remove</a></td>
+					</tr>
+				<%-- </c:forEach> --%>
+				</tbody>
+			</table>
+			
+			<br>
+			<h6>Sub Total: $ {{Sum}}</h6>
+			<h6>Taxes: $ {{Tax}}</h6>
+			<hr>
+			<h5>Total Charge: $ {{Total Charge}}</h5>
+			
+			
+			
+		</div>
+		<div class="contentFooter">
+		<a href="/checkout">Proceed To Checkout</a>
+		</div>
 	</div>
 	
 	<div class ="footer">

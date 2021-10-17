@@ -1,5 +1,7 @@
 package com.seefoodquickly.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.seefoodquickly.models.Product;
 import com.seefoodquickly.models.User;
+import com.seefoodquickly.services.ProductService;
 import com.seefoodquickly.services.UserService;
 import com.seefoodquickly.validators.UserValidator;
 
@@ -25,6 +29,9 @@ public class HomeController {
 	
 	@Autowired
 	UserValidator uVal;
+	
+	@Autowired
+	ProductService pServ;
 
 	@GetMapping("/") // Initial Router
 	public String index(HttpSession session) {
@@ -74,7 +81,8 @@ public class HomeController {
 			User loggedUser = this.uServ.findUserById(userId);
 			model.addAttribute("loggedUser", loggedUser);
 			
-			
+			List<Product> allProducts = pServ.getAllProducts();
+			model.addAttribute("allProducts", allProducts);
 			
 			return "menu.jsp";
 		}
@@ -147,7 +155,7 @@ public class HomeController {
 	
 	//Add Product JSP
 	@GetMapping("/addProduct")
-	public String addProduct(Model model, HttpSession session) {
+	public String addProduct(@ModelAttribute("product") Product product, Model model, HttpSession session) {
 			if(session.getAttribute("userId")==null) {
 				return "redirect:/";
 			} else {
@@ -184,7 +192,7 @@ public class HomeController {
 	
 	// Register
 	@PostMapping("/register")
-	public String registerPost(@Valid @ModelAttribute("album") User newUser, BindingResult result, HttpSession session) {
+	public String registerPost(@Valid @ModelAttribute("user") User newUser, BindingResult result, HttpSession session) {
 		uVal.validate(newUser, result);
 		if(result.hasErrors()) {
 			return "register.jsp";
@@ -193,6 +201,13 @@ public class HomeController {
 			uServ.login(session, newUser);
 			return "redirect:/menu";
 		}		
+	}
+	
+	// Add Product
+	@PostMapping("/addProduct")
+	public String addProduct(@Valid @ModelAttribute("product") Product product, BindingResult result) {
+			pServ.createProduct(product);
+		return "redirect:/menu";
 	}
 	
 	
