@@ -17,8 +17,8 @@ import com.seefoodquickly.services.StripeService;
 
 @Controller
 public class PaymentController {
-    // Reading the value from the application.properties file
-    @Value("pk_test_51JkGb9LiLrBml3YZDf9jKApvu5SDJnA3DMAnJYWNnNMLVAt2kygpBCM6GQtJXnILH0k68HMl8Uv86Mx7TaXt3wtS00AIvnnaWm")
+    // Reading the value from the application.properties file - Adam
+	@Value("${STRIPE_PUBLIC_KEY}")
     private String stripePublicKey;
 
     @RequestMapping("/")
