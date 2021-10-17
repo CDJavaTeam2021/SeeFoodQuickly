@@ -44,9 +44,9 @@
 		<div class="contentHeader">
 		</div>
 		<div class="cartBody">
-			<h4>Order for: {UserName}</h4>
-			<h6>Contact: {PhoneNumber}</h6>
-			<h6>Date: {CurrDate}</h6>
+			<h4>Order for: <c:out value="${loggedUser.userName}"/> </h4>
+			<h6>Contact: <c:out value="${loggedUser.userPhone}"/></h6>
+			<h6>Date: <fmt:formatDate type = "date" dateStyle = "long"  value = "${currentDate}" /></h6>
 			<br>
 			<table class="table table-striped table-hover">
 				<thead>
@@ -58,11 +58,11 @@
 					</tr>
 				</thead>
 				<tbody>
-				<c:forEach items="${sessionScope.myCart }" var="item">
+				<c:forEach items="${sessionScope.myCart}" var="item">
 					<tr>
-						<td>${item.itemProduct.itemName }</td>
-						<td>${item.quantity }</td>
-						<td>$${item.lineTotal }</td>
+						<td>${item.itemProduct.itemName}</td>
+						<td>${item.quantity}</td>
+						<td>$${item.lineTotal}</td>
 						<td>REMOVE</td>
 					</tr>
 				</c:forEach>
@@ -79,7 +79,7 @@
 			
 		</div>
 		<div class="contentFooter">
-		<a href="/checkout/{id}">Proceed To Checkout</a>
+		<a href="/checkout">Proceed To Checkout</a>
 		</div>
 	</div>
 	

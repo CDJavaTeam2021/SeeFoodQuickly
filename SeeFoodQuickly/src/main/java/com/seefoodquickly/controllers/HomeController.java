@@ -1,5 +1,6 @@
 package com.seefoodquickly.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.seefoodquickly.models.Item;
 import com.seefoodquickly.models.Product;
 import com.seefoodquickly.models.User;
 import com.seefoodquickly.services.OrderingService;
@@ -93,6 +93,7 @@ public class HomeController {
 			List<Product> allProducts = oServ.getAllProducts();
 			model.addAttribute("allProducts", allProducts);
 			
+			
 			return "menu.jsp";
 		}
 		
@@ -108,6 +109,8 @@ public class HomeController {
 			User loggedUser = this.uServ.findUserById(userId);
 			model.addAttribute("loggedUser", loggedUser);
 			
+			Date newDate = new Date();
+			model.addAttribute("currentDate", newDate);
 			
 			
 			return "cart.jsp";
@@ -179,14 +182,6 @@ public class HomeController {
 				return "addProduct.jsp";
 			}
 		}
-	
-	//Remove from cart
-	@GetMapping("/remove/{item_index}")
-	public String removeItem(@PathVariable("item_index") String indexStr, HttpSession session) {
-		oServ.removeFromCart(indexStr, session);
-		return "redirect:/cart";
-	}
-	
 	
 	
 	///////////////////////////////////////////////  POST REQUESTS  //////////////////////////////////////////

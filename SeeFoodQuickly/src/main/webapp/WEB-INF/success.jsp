@@ -42,8 +42,13 @@
 	
 	<div class="content">
 		<div class="contentHeader">
+		<h3>Thank You!</h3>
 		</div>
-		<div class="contentBody">
+		<div class="successBody">
+		<h4 style="color:green">Success!  Your order has been placed!</h4>
+		<h6 style="color:green">A text message has been sent to: <c:out value="${loggedUser.userName}"/> at <c:out value="${loggedUser.userPhone}"/>.</h6>
+		<br>
+		<a href="/orders"><button>Check Order Status</button></a>
 		</div>
 		<div class="contentFooter">
 		</div>
