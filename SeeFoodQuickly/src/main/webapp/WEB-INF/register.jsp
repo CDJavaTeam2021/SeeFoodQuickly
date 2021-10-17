@@ -51,7 +51,7 @@
 		<form:form method="POST" action="/register" modelAttribute="user">
 			<div class="registerPad">
 				<p>
-					<form:label path="userName">Username:</form:label>
+					<form:label path="userName">Name:</form:label>
 					<form:input type="text" path="userName" class="form-control" style="width:200px"/>
 				</p>
 				<p>

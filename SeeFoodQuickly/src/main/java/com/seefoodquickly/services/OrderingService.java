@@ -110,12 +110,11 @@ public class OrderingService {
 	
 	//accepts fields as Strings and converts as necessary
 	public void addItemToCart(HttpSession session, 
-			String prodIdS,  
+			Long prodId,  
 			String quantityS) {
 		
 		//converting String inputs into appropriate data types
 		int quantity = Integer.valueOf(quantityS);
-		Long prodId = Long.valueOf(prodIdS);
 		
 		//instantiating and populating item with data
 		Item newItem = new Item();
@@ -125,15 +124,20 @@ public class OrderingService {
 		cost *= quantity;
 		newItem.setLineTotal(cost);
 		
+		System.out.println("New Item Populated");
+		
 		//Adding item to cart
-		List<Item> cart = (List<Item>) session.getAttribute("myCart");
-		int cartIndex = cart.size();
+		List<Item> myCart = (List<Item>) session.getAttribute("myCart");
+		int cartIndex = myCart.size();
 		newItem.setCartIndex(cartIndex);
-		cart.add(newItem);
-		session.setAttribute("myCart", cart);
+		myCart.add(newItem);
+		session.setAttribute("myCart", myCart);
 		float total = (float) session.getAttribute("cartTotal");
 		total += cost;
-		session.setAttribute("cartTotal", total);		
+		session.setAttribute("cartTotal", total);
+		
+		
+		
 	}
 
 	
