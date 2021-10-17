@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.seefoodquickly.models.Product;
 import com.seefoodquickly.models.User;
-import com.seefoodquickly.services.ProductService;
+import com.seefoodquickly.services.OrderingService;
 import com.seefoodquickly.services.UserService;
 import com.seefoodquickly.validators.UserValidator;
 
@@ -31,7 +31,7 @@ public class HomeController {
 	UserValidator uVal;
 	
 	@Autowired
-	ProductService pServ;
+	OrderingService oServ;
 
 	@GetMapping("/") // Initial Router
 	public String index(HttpSession session) {
@@ -81,7 +81,7 @@ public class HomeController {
 			User loggedUser = this.uServ.findUserById(userId);
 			model.addAttribute("loggedUser", loggedUser);
 			
-			List<Product> allProducts = pServ.getAllProducts();
+			List<Product> allProducts = oServ.getAllProducts();
 			model.addAttribute("allProducts", allProducts);
 			
 			return "menu.jsp";
@@ -155,7 +155,9 @@ public class HomeController {
 	
 	//Add Product JSP
 	@GetMapping("/addProduct")
+
 	public String addProduct(@ModelAttribute("product") Product product, Model model, HttpSession session) {
+
 			if(session.getAttribute("userId")==null) {
 				return "redirect:/";
 			} else {
@@ -206,7 +208,7 @@ public class HomeController {
 	// Add Product
 	@PostMapping("/addProduct")
 	public String addProduct(@Valid @ModelAttribute("product") Product product, BindingResult result) {
-			pServ.createProduct(product);
+			oServ.saveProduct(product);
 		return "redirect:/menu";
 	}
 	

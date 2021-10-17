@@ -139,9 +139,29 @@ public class OrderingService {
 	
 	
 	//Order Methods
+	
+	//find by ID where ID is provided as a String
+	public Order findOrderById(String orderIdStr) {
+		Long orderId = Long.valueOf(orderIdStr);
+		Order order = oRepo.findById(orderId).get();
+		return order;
+	}
+	
+	//overloaded to accept order ID as a Long
+	public Order findOrderById(Long orderId) {
+		Order order = oRepo.findById(orderId).get();
+		return order;
+	}
+	
 	public List<Order> getAllOrders() {
 		return (List<Order>) oRepo.findAll();
 	}
+	
+	//Returns list of only the open orders which SHOULD be oldest first
+	public List<Order> getOpenOrders(){
+		return oRepo.findByOrderOpenIsOrderByCreatedAt(true);
+	}
+
 	
 	//Method takes in session to determine who is ordering and takes in orderEmail and orderPhone
 	//in case User wants to override default contact
@@ -186,12 +206,32 @@ public class OrderingService {
 		
 	}
 	
+	public String confirmOrder(String orderIdStr) {
+		Long orderId = Long.valueOf(orderIdStr);
+		Order order = oRepo.findById(orderId).get(); //Assumes already valid ID
+		order.setStatus("Confirmed");
+		//TODO add text notification function here
+		oRepo.save(order);
+		return order.getOrderNumber(); //returns order number
+	}
+	
+	public void completeOrder(String orderIdStr) {
+		Long orderId = Long.valueOf(orderIdStr);
+		Order order = oRepo.findById(orderId).get(); //assumes id is correct
+		order.setStatus("Finished");
+		order.setOrderOpen(false);
+		//TODO add test notification here
+		oRepo.save(order);
+	}
+	
 	//Empty the cart
 	public void emptyCart(HttpSession session) {
 		List<Item> empty = new ArrayList<Item>();
 		session.setAttribute("myCart", empty);
 		session.setAttribute("cartTotal", 0f);
 	}
+	
+	
 	
 	
 

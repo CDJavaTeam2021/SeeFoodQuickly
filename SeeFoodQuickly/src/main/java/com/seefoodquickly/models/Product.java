@@ -14,6 +14,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="products")
@@ -28,8 +31,12 @@ public class Product {
 	
 	private Date updatedAt;
 	
+	@NotBlank
+	@Size(min = 2, max = 50)
 	private String itemName;
 	
+	@NotBlank
+	@Size(min = 2, max = 300)
 	private String description;
 	
 	private float price;

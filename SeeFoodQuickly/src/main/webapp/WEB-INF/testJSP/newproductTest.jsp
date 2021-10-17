@@ -42,36 +42,35 @@
 	
 	<div class="content">
 		<div class="contentHeader">
-			<h1>Menu:</h1>
+			<h1>New Product</h1>
 		</div>
-		<div class="menuBody">
-			<c:forEach items="${allProducts}" var="product">
-				<div class="card" style="width: 15rem; display:flex; flex-direction: column; padding:5px; align-items: center; height:300px; margin-bottom:15px; border-color:rgb(64, 194, 198);">
-  					<img src="images/productImage.png" class="card-img-top" alt="productImage" style="width:60px; height:60px">
-  					<div class="card-body" style="display:flex; flex-direction:column; align-items: center">
-   						 <h6 class="card-title"> <c:out value="${product.itemName}"/> </h6>
-    					 <p class="card-text" style="font-size: small;"> <c:out value="${product.description}"/></p>
-   						 <form action="/addItemToCart/${product.id}" method="POST">
-   						 	<label style="font-size: small;">Choose Amount:</label>
-   						 	<select name="quantity" class="form-select" aria-label="Default select example" style="width:75px; font-size: small;">
-							  <option value="1">1</option>
-							  <option value="2">2</option>
-							  <option value="3">3</option>
-							  <option value="4">4</option>
-							  <option value="5">5</option>
-							  <option value="6">6</option>
-							  <option value="7">7</option>
-							  <option value="8">8</option>
-							  <option value="9">9</option>
-							  <option value="10">10</option>
-							</select>
-							<br>
-							<button type="submit" style="font-size: small">Add To Cart</button>
-   						 </form>
-  					</div>
+		<div class="contentBody">
+					<form:form action="/products/new" method="post" modelAttribute="newProduct">
+						<p>
+							<form:label path="itemName">Product Name</form:label>
+							<form:errors path="itemName" />
+							<form:input path="itemName" />
+						</p>
+						<p>
+							<form:label path="description">Description</form:label>
+							<form:errors path="description" />
+							<form:textarea path="description"/>
+						</p>
+						<p>
+							<form:label path="price">Price</form:label>
+							<form:errors path="price" />
+							<form:input path="price" type="number" min="0.01" step="0.01"/>
+						</p>
+						<p>
+							<form:label path="makeMinutes">Time to Make in Minutes:</form:label>
+							<form:errors path="makeMinutes" />
+							<form:input path="makeMinutes" type="number" min="1" step=".5"/>
+						</p>
+						<form:button>Save Item!</form:button>
+
+					</form:form>
+
 				</div>
-			</c:forEach>
-		</div>
 		<div class="contentFooter">
 		<h3><a href="/cart">Proceed to cart</a></h3>	 
 		</div>
