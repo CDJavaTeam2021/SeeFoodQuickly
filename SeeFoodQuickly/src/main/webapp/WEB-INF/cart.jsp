@@ -32,7 +32,7 @@
 			        <a class="nav-link" href="/addProduct">Add Product</a>
 			      </div>
 			      <div class="navbar-nav" style="align-content: flex-end;">
-			       	<a class="nav-link">Signed in as: {USERNAME}</a>
+			       	<a class="nav-link"><c:out value="${loggedUser.userName}" /></a>
 			        <a class="nav-link" href="/logout">Logout</a>
 			      </div>
 		      	</div>
@@ -58,22 +58,23 @@
 					</tr>
 				</thead>
 				<tbody>
-				<%-- <c:forEach items="" var=""> --%>
+				<c:forEach items="${sessionScope.myCart }" var="item">
 					<tr>
-						<td></td>
-						<td></td>
-						<td>$</td>
-						<td><a>Remove</a></td>
+						<td>${item.itemProduct.itemName }</td>
+						<td>${item.quantity }</td>
+						<td>$${item.lineTotal }</td>
+<%-- 						<td><a href="/remove/${item.cartIndex}">Remove ${item.cartIndex}</a></td> --%>
+						<td>REMOVE</td>
 					</tr>
-				<%-- </c:forEach> --%>
+				</c:forEach>
 				</tbody>
 			</table>
 			
 			<br>
-			<h6>Sub Total: $ {{Sum}}</h6>
-			<h6>Taxes: $ {{Tax}}</h6>
+			<h6>Sub Total: $ ${sessionScope.cartTotal}</h6>
+			<h6>Taxes: $<c:out value="${sessionScope.cartTotal * .0925}"/></h6>
 			<hr>
-			<h5>Total Charge: $ {{Total Charge}}</h5>
+			<h5>Total Charge: $ <c:out value="${sessionScope.cartTotal * 1.0925}"/></h5>
 			
 			
 			
