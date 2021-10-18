@@ -163,20 +163,55 @@ public class HomeController {
 			} else {
 				Long userId = (Long)session.getAttribute("userId");
 				User loggedUser = this.uServ.findUserById(userId);
-				model.addAttribute("loggedUser", loggedUser);
-				
-				
-				
-				return "orders.jsp";
+				if (loggedUser.getType().equals("customer")) {
+					return "redirect:/my_orders";
+				} else {
+					model.addAttribute("loggedUser", loggedUser);
+					model.addAttribute("orderList", oServ.getAllOrdersRecentFirst());			
+					return "orders.jsp";
+				}				
 			}
 		}
+	
+	@GetMapping("/orders/open")
+	public String queue(Model model, HttpSession session) {
+		if(session.getAttribute("permissions").equals("employee") || session.getAttribute("permissions").equals("admin")) {
+			User loggedUser = uServ.findUserById((Long) session.getAttribute("userId"));
+			model.addAttribute("loggedUser", loggedUser);
+			model.addAttribute("orderList", oServ.getOpenOrders());			
+			return "orders.jsp";
+		} else {
+			return "redirect:/";
+		}
+	}
+	
+	//View specific Order
+	@GetMapping("/orders/{order_id}")
+	public String viewOrder(@PathVariable("order_id") String orderIdStr, Model model, HttpSession session) {
+		Order order = oServ.safelyFindOrderById(orderIdStr);
+		if(order == null) {
+			return "redirect:/my_orders";
+		} 
+		if(session.getAttribute("userId")==null) {
+			return "redirect:/";
+		} else {
+			Long userId = (Long)session.getAttribute("userId");
+			User loggedUser = this.uServ.findUserById(userId);
+			if(order.getCustomer().getId() == loggedUser.getId() || loggedUser.getType().equals("employee") || loggedUser.getType().equals("admin")) {
+				model.addAttribute("loggedUser", loggedUser);
+				model.addAttribute("thisOrder", order);
+				return "/orderView.jsp";
+			}
+			return "redirect:/orders";
+		}	
+	}
 	
 	//Add Product JSP
 	@GetMapping("/addProduct")
 
 	public String addProduct(@ModelAttribute("product") Product product, Model model, HttpSession session) {
 
-			if(session.getAttribute("userId")==null) {
+			if(session.getAttribute("userId")==null || session.getAttribute("permissions").equals("customer")) {
 				return "redirect:/";
 			} else {
 				Long userId = (Long)session.getAttribute("userId");
@@ -188,6 +223,16 @@ public class HomeController {
 				return "addProduct.jsp";
 			}
 		}
+	
+	//MyOrderHistory
+	@GetMapping("/my_orders")
+	public String getMyOrders(HttpSession session, Model viewModel) {
+		Long userId = (Long)session.getAttribute("userId");
+		User loggedUser = this.uServ.findUserById(userId);
+		viewModel.addAttribute("loggedUser", loggedUser);
+		viewModel.addAttribute("orderList", oServ.myOrders(loggedUser));
+		return "customerOrders.jsp";
+	}
 	
 	
 	///////////////////////////////////////////////  POST REQUESTS  //////////////////////////////////////////

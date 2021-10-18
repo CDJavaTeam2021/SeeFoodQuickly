@@ -18,7 +18,7 @@
 <div class="container">
 <div class="bodyStyle">
 
-	<div class="header">
+		<div class="header">
 		<nav class="navbar navbar-expand-lg navbar-light">
 		  <div class="container-fluid">
 		    <a class="navbar-brand" href="#">SFQ!</a>
@@ -38,9 +38,6 @@
 			        		<a class="nav-link" href="/my_orders">My Orders</a>
 			        	</c:otherwise>
 			        </c:choose>
-			        
-			        
-			        
 			      </div>
 			      <div class="navbar-nav" style="align-content: flex-end;">
 			       	<a class="nav-link"><c:out value="${loggedUser.userName}" /></a>
@@ -53,38 +50,43 @@
 	
 	<div class="content">
 		<div class="contentHeader">
-			<h1>Order History:</h1>
+		<h3>Details for Order Number ${thisOrder.orderNumber}</h3>
+		<h4>Status: ${thisOrder.status }</h4>
 		</div>
-		<div class="contentBody">
-		
+		<div class="cartBody">
+			<h4>Order for: <c:out value="${thisOrder.customer.userName}"/> </h4>
+			<h6>Contact: <c:out value="${thisOrder.orderPhone}"/></h6>
+			<h6>Date: <fmt:formatDate type = "date" dateStyle = "long"  value = "${thisOrder.createdAt}" /></h6>
+			<br>
 			<table class="table table-striped table-hover">
 				<thead>
 					<tr>
-						<th>Order #:</th>
-						<th>Name</th>
-						<th>Phone:</th>
-						<th>Time Ordered:</th>
-						<th>Status:</th>
-						<th style="display: flex; justify-content: space-around;align-items: center  ">Actions</th>
+						<th>Item</th>
+						<th>Quantity</th>
+						<th>Charge</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${orderList }" var="order">
+				<c:forEach items="${thisOrder.items}" var="item">
 					<tr>
-					<td><a href="/orders/${order.id}">${order.orderNumber }</a></td>
-					<td>${order.customer.userName }</td>
-					<td>${order.orderPhone }</td>
-					<td>${order.createdAt }</td>
-					<td>${order.status}</td>
-					<td style="display: flex; justify-content: space-between; margin-right:5px"><a style="color:black" href="">SMS</a>  <a style="color:red" href="">Delete</a></td>
+						<td>${item.itemProduct.itemName }</td>
+						<td>${item.quantity }</td>
+						<td>$${item.lineTotal }</td>
 					</tr>
-					</c:forEach>
+				</c:forEach>
 				</tbody>
 			</table>
-		
+			
+			<br>
+			<h6>Sub Total: $ ${thisOrder.subtotal}</h6>
+			<h6>Taxes: $<c:out value="${thisOrder.tax}"/></h6>
+			<hr>
+			<h5>Total Charge: $ <c:out value="${thisOrder.total}"/></h5>
+
+			
+			
 		</div>
 		<div class="contentFooter">
-		<h3><a href="/menu">Place New Order</a></h3>	 
 		</div>
 	</div>
 	

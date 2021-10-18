@@ -9,8 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/css/style.css"/>
-<script type="text/javascript" src=“/js/app.js”></script>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script type="text/javascript" src=“js/app.js”></script>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <script src=“/webjars/bootstrap/js/bootstrap.min.js”></script>
 </head>
@@ -38,9 +38,6 @@
 			        		<a class="nav-link" href="/my_orders">My Orders</a>
 			        	</c:otherwise>
 			        </c:choose>
-			        
-			        
-			        
 			      </div>
 			      <div class="navbar-nav" style="align-content: flex-end;">
 			       	<a class="nav-link"><c:out value="${loggedUser.userName}" /></a>
@@ -53,7 +50,7 @@
 	
 	<div class="content">
 		<div class="contentHeader">
-			<h1>Order History:</h1>
+			<h1>My Orders:</h1>
 		</div>
 		<div class="contentBody">
 		
@@ -65,7 +62,6 @@
 						<th>Phone:</th>
 						<th>Time Ordered:</th>
 						<th>Status:</th>
-						<th style="display: flex; justify-content: space-around;align-items: center  ">Actions</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -76,7 +72,6 @@
 					<td>${order.orderPhone }</td>
 					<td>${order.createdAt }</td>
 					<td>${order.status}</td>
-					<td style="display: flex; justify-content: space-between; margin-right:5px"><a style="color:black" href="">SMS</a>  <a style="color:red" href="">Delete</a></td>
 					</tr>
 					</c:forEach>
 				</tbody>
@@ -89,7 +84,7 @@
 	</div>
 	
 	<div class ="footer">
-		<img alt="logo" src="/images/octopusLogo.png" class="headerLogo">
+		<img alt="logo" src="images/octopusLogo.png" class="headerLogo">
 	</div>
 </div>
 </div>
