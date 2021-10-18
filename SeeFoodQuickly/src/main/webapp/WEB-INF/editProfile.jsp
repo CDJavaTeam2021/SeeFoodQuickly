@@ -67,7 +67,7 @@
 					  <input type="text" name="userPhone"class="form-control" id="phone" onInput="this.value = phoneFormat(this.value)" value="${user.userPhone}">
 					</div>
 					<div class="mb-3">
-					  <label for="type" class="form-label">User Type:</label>
+					  <label for="type" class="form-label">Select Type:</label>
 					  <select name="type">
 					  <option selected value="${user.type}"></option>
 				      <option value="customer">customer</option>
@@ -78,7 +78,7 @@
 					  	<c:set var="loggedUser" value="${loggedUser}"/>
 						<c:set var="user" value="${user}"/>
 						<c:if test="${loggedUser == user}">
-						<a href="/profile/${loggedUser.id}/edit"> <button class="btn btn-outline-dark" type="button">Update Profile</button></a>
+						<button class="btn btn-outline-dark" type="submit">Confirm Edit</button>
 						</c:if>
 					</div>
 				</div>		
