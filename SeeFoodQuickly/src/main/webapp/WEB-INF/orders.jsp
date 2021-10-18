@@ -39,9 +39,6 @@
 			        		<a class="nav-link" href="/my_orders">My Orders</a>
 			        	</c:otherwise>
 			        </c:choose>
-			        
-			        
-			        
 			      </div>
 			      <div class="navbar-nav" style="align-content: flex-end;">
 			       	<a class="nav-link"><c:out value="${loggedUser.userName}" /></a>

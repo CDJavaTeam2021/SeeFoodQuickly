@@ -130,5 +130,10 @@ public class UserService {
 			return false;
 		}
 	}
+	
+	//Update User
+	public User updateUser(User user) {
+		return this.uRepo.save(user);
+	}
 
 }
