@@ -44,32 +44,31 @@
 		<div class="contentHeader">
 			
 		</div>
-				<div class="formPad">
-					<h3>Your Items:</h3>
-					<table>
-						<c:forEach items="${sessionScope.myCart}" var="item">
-							<tr>
-								<td>${item.quantity } x </td>
-								<td>${item.itemProduct.description }</td>
-								<td>$${item.lineTotal }</td>
-							</tr>
-						</c:forEach>
-					</table>
+				<div class="checkoutPad">
+					<h3>Your Order:</h3>
 					<hr>
-					<h6>Sub Total: $ ${sessionScope.cartTotal}</h6>
-					<h6>
-						Taxes: $<c:out value="${sessionScope.cartTotal * .0925}" />
-					</h6>
+					<div class="checkout_table" style="border-style:solid; border-width: 1px; padding:15px; border-radius:5px" >
+						<table>
+							<tbody>
+							<c:forEach items="${sessionScope.myCart}" var="item">
+								<tr style="display:flex; flex-direction: row; justify-content: space-around; margin-bottom: 5px">
+									<td>(${item.quantity}) </td>
+									<td style="width:270px">${item.itemProduct.itemName}</td>
+									<td>$${item.lineTotal }</td>
+								</tr>
+							</c:forEach>
+							</tbody>
+						</table>
+					</div>
 					<hr>
-					<h5>
-						Total Charge: $<c:out value="${sessionScope.cartTotal * 1.0925}" />
-					</h5>
-					<h5>Please Submit Payment</h5>
+					<h6 style="display:flex; flex-direction:row; width:350px;justify-content: flex-end">Sub Total: $ ${sessionScope.cartTotal}</h6>
+					<h6 style="display:flex; flex-direction:row; width:350px;justify-content: flex-end">Taxes: $<c:out value="${sessionScope.cartTotal * .0925}" /></h6>
+					<h5 style="display:flex; flex-direction:row; width:350px;justify-content: flex-end">Total Charge: $<c:out value="${sessionScope.cartTotal * 1.0925}" /></h5>
 					<hr>
 					<!-- 							CREDIT CARD PROCESSING
  -->
 				<form action="/checkout" method="post">
-					<button>Order Submit [TEST]</button>
+					<button>Place Order [TEST]</button>
 				</form>
 				</div>
 				<div class="contentFooter">
