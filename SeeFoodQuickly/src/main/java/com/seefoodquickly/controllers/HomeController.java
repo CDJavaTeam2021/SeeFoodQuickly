@@ -302,6 +302,22 @@ public class HomeController {
 			session.setAttribute("myPhone", newPhone);
 			return "redirect:/cart";
 		}
+		
+		@PostMapping("/orders/confirm/{order_id}")
+		public String confirmOrder(@RequestParam("phone") String confirmPhone, 
+				HttpSession session,
+				@PathVariable("order_id") String orderIdStr) {
+			oServ.confirmOrder(orderIdStr, confirmPhone);
+			return "redirect:/orders/open";
+		}
+		
+		@PostMapping("/orders/complete/{order_id}")
+		public String completeOrder(@RequestParam("phone") String notifyPhone, 
+				HttpSession session,
+				@PathVariable("order_id") String orderIdStr) {
+			oServ.completeOrder(orderIdStr, notifyPhone);
+			return "redirect:/orders/open";
+		}
 	
 	
 	///////////////////////////////////////////////  UTILITIES  //////////////////////////////////////////
