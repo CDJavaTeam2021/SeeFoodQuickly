@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.seefoodquickly.models.Item;
 import com.seefoodquickly.models.Order;
 import com.seefoodquickly.models.Product;
+import com.seefoodquickly.models.User;
 import com.seefoodquickly.repositories.ItemRepository;
 import com.seefoodquickly.repositories.OrderRepository;
 import com.seefoodquickly.repositories.ProductRepository;
@@ -188,6 +189,13 @@ public class OrderingService {
 		return order;
 	}
 	
+	//Returns null if order doesn't exist
+	public Order safelyFindOrderById(String orderIdStr) {
+		Long orderId = Long.valueOf(orderIdStr);
+		Order order = oRepo.findById(orderId).orElse(null);
+		return order;
+	}
+	
 	public List<Order> getAllOrders() {
 		return (List<Order>) oRepo.findAll();
 	}
@@ -195,6 +203,27 @@ public class OrderingService {
 	//Returns list of only the open orders which SHOULD be oldest first
 	public List<Order> getOpenOrders(){
 		return oRepo.findByOrderOpenIsOrderByCreatedAt(true);
+	}
+	
+	//Returns list of all orders ordered by most recent
+	public List<Order> getAllOrdersRecentFirst(){
+		return oRepo.findAllByOrderByCreatedAt();
+	}
+	
+	//Returns orders belonging to specific customer ordered by most recent first
+	public List<Order> myOrders(String userIdStr){
+		Long userId = Long.valueOf(userIdStr);
+		User user = uRepo.findById(userId).get();
+		return oRepo.findByCustomerOrderByCreatedAt(user);
+	}
+	
+	public List<Order> myOrders(Long userId){
+		User user = uRepo.findById(userId).get();
+		return oRepo.findByCustomerOrderByCreatedAt(user);
+	}
+	
+	public List<Order> myOrders(User user){
+		return oRepo.findByCustomerOrderByCreatedAt(user);
 	}
 
 	

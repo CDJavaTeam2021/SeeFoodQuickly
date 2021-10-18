@@ -9,8 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/style.css"/>
-<script type="text/javascript" src=“js/app.js”></script>
+<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+<script type="text/javascript" src=“/js/app.js”></script>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <script src=“/webjars/bootstrap/js/bootstrap.min.js”></script>
 </head>
@@ -28,8 +28,16 @@
 			    <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="display:flex; justify-content: space-between">
 			      <div class="navbar-nav" style="align-items: flex-start;">
 			        <a class="nav-link" href="/menu">Menu</a>
-			        <a class="nav-link" href="/orders">View Orders</a>
-			        <a class="nav-link" href="/addProduct">Add Product</a>
+			        <c:choose>
+			        	<c:when test="${loggedUser.type == 'employee' || loggedUser.type == 'admin' }">
+			        		<a class="nav-link" href="/addProduct">Add Product</a>
+			        		<a class="nav-link" href="/orders/open">Order Queue</a>
+			        		<a class="nav-link" href="/orders">Order History</a>
+			        	</c:when>
+			        	<c:otherwise>
+			        		<a class="nav-link" href="/my_orders">My Orders</a>
+			        	</c:otherwise>
+			        </c:choose>
 			      </div>
 			      <div class="navbar-nav" style="align-content: flex-end;">
 			       	<a class="nav-link"><c:out value="${loggedUser.userName}" /></a>
@@ -49,14 +57,14 @@
 		<h5>Your order number is ${newOrder.orderNumber }</h5>
 		<h6 style="color:green">A text message has been sent to: <c:out value="${loggedUser.userName}"/> at <c:out value="${newOrder.orderPhone}"/>.</h6>
 		<br>
-		<a href="/orders"><button>Check Order Status</button></a>
+		<a href="/orders/${newOrder.id }"><button>Check Order Status</button></a>
 		</div>
 		<div class="contentFooter">
 		</div>
 	</div>
 	
 	<div class ="footer">
-		<img alt="logo" src="images/octopusLogo.png" class="headerLogo">
+		<img alt="logo" src="/images/octopusLogo.png" class="headerLogo">
 	</div>
 </div>
 </div>

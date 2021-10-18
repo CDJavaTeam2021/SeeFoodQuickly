@@ -28,8 +28,16 @@
 			    <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="display:flex; justify-content: space-between">
 			      <div class="navbar-nav" style="align-items: flex-start;">
 			        <a class="nav-link" href="/menu">Menu</a>
-			        <a class="nav-link" href="/orders">View Orders</a>
-			        <a class="nav-link" href="/addProduct">Add Product</a>
+			        <c:choose>
+			        	<c:when test="${loggedUser.type == 'employee' || loggedUser.type == 'admin' }">
+			        		<a class="nav-link" href="/addProduct">Add Product</a>
+			        		<a class="nav-link" href="/orders/open">Order Queue</a>
+			        		<a class="nav-link" href="/orders">Order History</a>
+			        	</c:when>
+			        	<c:otherwise>
+			        		<a class="nav-link" href="/my_orders">My Orders</a>
+			        	</c:otherwise>
+			        </c:choose>
 			      </div>
 			      <div class="navbar-nav" style="align-content: flex-end;">
 
