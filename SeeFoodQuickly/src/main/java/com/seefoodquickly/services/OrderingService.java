@@ -11,10 +11,12 @@ import org.springframework.stereotype.Service;
 import com.seefoodquickly.models.Item;
 import com.seefoodquickly.models.Order;
 import com.seefoodquickly.models.Product;
+import com.seefoodquickly.models.User;
 import com.seefoodquickly.repositories.ItemRepository;
 import com.seefoodquickly.repositories.OrderRepository;
 import com.seefoodquickly.repositories.ProductRepository;
 import com.seefoodquickly.repositories.UserRepository;
+import com.seefoodquickly.twilio.TwilioService;
 
 @Service
 public class OrderingService {
@@ -26,6 +28,9 @@ public class OrderingService {
 	
 	@Autowired
 	UserService uServ;
+	
+	@Autowired
+	TwilioService twServ;
 	
 	public OrderingService(ProductRepository pRepo, ItemRepository iRepo, OrderRepository oRepo, UserService uServ) {
 		this.pRepo = pRepo;
@@ -188,6 +193,13 @@ public class OrderingService {
 		return order;
 	}
 	
+	//Returns null if order doesn't exist
+	public Order safelyFindOrderById(String orderIdStr) {
+		Long orderId = Long.valueOf(orderIdStr);
+		Order order = oRepo.findById(orderId).orElse(null);
+		return order;
+	}
+	
 	public List<Order> getAllOrders() {
 		return (List<Order>) oRepo.findAll();
 	}
@@ -195,6 +207,27 @@ public class OrderingService {
 	//Returns list of only the open orders which SHOULD be oldest first
 	public List<Order> getOpenOrders(){
 		return oRepo.findByOrderOpenIsOrderByCreatedAt(true);
+	}
+	
+	//Returns list of all orders ordered by most recent
+	public List<Order> getAllOrdersRecentFirst(){
+		return oRepo.findAllByOrderByCreatedAt();
+	}
+	
+	//Returns orders belonging to specific customer ordered by most recent first
+	public List<Order> myOrders(String userIdStr){
+		Long userId = Long.valueOf(userIdStr);
+		User user = uRepo.findById(userId).get();
+		return oRepo.findByCustomerOrderByCreatedAt(user);
+	}
+	
+	public List<Order> myOrders(Long userId){
+		User user = uRepo.findById(userId).get();
+		return oRepo.findByCustomerOrderByCreatedAt(user);
+	}
+	
+	public List<Order> myOrders(User user){
+		return oRepo.findByCustomerOrderByCreatedAt(user);
 	}
 
 	
@@ -243,21 +276,26 @@ public class OrderingService {
 		
 	}
 	
-	public String confirmOrder(String orderIdStr) {
+	public String confirmOrder(String orderIdStr, String phone) {
 		Long orderId = Long.valueOf(orderIdStr);
 		Order order = oRepo.findById(orderId).get(); //Assumes already valid ID
 		order.setStatus("Confirmed");
-		//TODO add text notification function here
+		////  send Twilio confirmation that order is being prepared
+		String message = order.getCustomer().getUserName() + ", we are starting to prepare your order and it will be ready in 10 minutes";
+    	twServ.sendSms(phone, message);		
+		
 		oRepo.save(order);
 		return order.getOrderNumber(); //returns order number
 	}
 	
-	public void completeOrder(String orderIdStr) {
+	public void completeOrder(String orderIdStr, String phone) {
 		Long orderId = Long.valueOf(orderIdStr);
 		Order order = oRepo.findById(orderId).get(); //assumes id is correct
 		order.setStatus("Finished");
 		order.setOrderOpen(false);
-		//TODO add test notification here
+		////  send Twilio confirmation that order is complete
+		String message = order.getCustomer().getUserName() + ", your order is completed!";
+    	twServ.sendSms(phone, message);		
 		oRepo.save(order);
 	}
 	

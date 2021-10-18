@@ -8,9 +8,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="refresh" content="15">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/style.css"/>
-<script type="text/javascript" src=“js/app.js”></script>
+<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+<script type="text/javascript" src=“/js/app.js”></script>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <script src=“/webjars/bootstrap/js/bootstrap.min.js”></script>
 </head>
@@ -28,8 +29,19 @@
 			    <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="display:flex; justify-content: space-between">
 			      <div class="navbar-nav" style="align-items: flex-start;">
 			        <a class="nav-link" href="/menu">Menu</a>
-			        <a class="nav-link" href="/orders">View Orders</a>
-			        <a class="nav-link" href="/addProduct">Add Product</a>
+			        <c:choose>
+			        	<c:when test="${loggedUser.type == 'employee' || loggedUser.type == 'admin' }">
+			        		<a class="nav-link" href="/addProduct">Add Product</a>
+			        		<a class="nav-link" href="/orders/open">Order Queue</a>
+			        		<a class="nav-link" href="/orders">Order History</a>
+			        	</c:when>
+			        	<c:otherwise>
+			        		<a class="nav-link" href="/my_orders">My Orders</a>
+			        	</c:otherwise>
+			        </c:choose>
+			        
+			        
+			        
 			      </div>
 			      <div class="navbar-nav" style="align-content: flex-end;">
 			       	<a class="nav-link"><c:out value="${loggedUser.userName}" /></a>
@@ -42,7 +54,7 @@
 	
 	<div class="content">
 		<div class="contentHeader">
-			<h1>Menu:</h1>
+			<h1>Order History:</h1>
 		</div>
 		<div class="contentBody">
 		
@@ -58,16 +70,31 @@
 					</tr>
 				</thead>
 				<tbody>
-					<%-- <c:forEach items="${ }" var=""> --%>
+					<c:forEach items="${orderList }" var="order">
 					<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td style="display: flex; justify-content: space-between; margin-right:5px"><a style="color:black" href="">SMS</a>  <a style="color:red" href="">Delete</a></td>
+					<td><a href="/orders/${order.id}">${order.orderNumber }</a></td>
+					<td>${order.customer.userName }</td>
+					<td>${order.orderPhone }</td>
+					<td>${order.createdAt }</td>
+					<td>${order.status}</td>
+					<td style="display: flex; justify-content: space-between; margin-right:5px">
+						<c:choose>
+							<c:when test="${order.status == 'New'}">
+								<form action="/orders/confirm/${order.id}" method="post">
+									<input name="phone" type="hidden" value="${order.orderPhone}">
+									<button>Confirm</button>
+								</form>
+							</c:when>
+							<c:when test="${order.status == 'Confirmed'}">
+								<form action="/orders/complete/${order.id}" method="post">
+									<input name="phone" type="hidden" value="${order.orderPhone}">
+									<button>Complete</button>
+								</form>
+							</c:when>
+						</c:choose>
+					</td>
 					</tr>
-					<%-- </c:forEach> --%>
+					</c:forEach>
 				</tbody>
 			</table>
 		
@@ -78,7 +105,7 @@
 	</div>
 	
 	<div class ="footer">
-		<img alt="logo" src="images/octopusLogo.png" class="headerLogo">
+		<img alt="logo" src="/images/octopusLogo.png" class="headerLogo">
 	</div>
 </div>
 </div>

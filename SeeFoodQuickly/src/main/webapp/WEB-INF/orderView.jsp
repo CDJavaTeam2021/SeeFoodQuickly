@@ -9,8 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/style.css"/>
-<script type="text/javascript" src=“js/app.js”></script>
+<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+<script type="text/javascript" src=“/js/app.js”></script>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <script src=“/webjars/bootstrap/js/bootstrap.min.js”></script>
 </head>
@@ -50,11 +50,13 @@
 	
 	<div class="content">
 		<div class="contentHeader">
+		<h3>Details for Order Number ${thisOrder.orderNumber}</h3>
+		<h4>Status: ${thisOrder.status }</h4>
 		</div>
 		<div class="cartBody">
-			<h4>Order for: <c:out value="${loggedUser.userName}"/> </h4>
-			<h6>Contact: <c:out value="${loggedUser.userPhone}"/></h6>
-			<h6>Date: <fmt:formatDate type = "date" dateStyle = "long"  value = "${currentDate}" /></h6>
+			<h4>Order for: <c:out value="${thisOrder.customer.userName}"/> </h4>
+			<h6>Contact: <c:out value="${thisOrder.orderPhone}"/></h6>
+			<h6>Date: <fmt:formatDate type = "date" dateStyle = "long"  value = "${thisOrder.createdAt}" /></h6>
 			<br>
 			<table class="table table-striped table-hover">
 				<thead>
@@ -62,41 +64,34 @@
 						<th>Item</th>
 						<th>Quantity</th>
 						<th>Charge</th>
-						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
-				<c:forEach items="${sessionScope.myCart}" var="item">
+				<c:forEach items="${thisOrder.items}" var="item">
 					<tr>
 						<td>${item.itemProduct.itemName }</td>
 						<td>${item.quantity }</td>
 						<td>$${item.lineTotal }</td>
- 						<td><a href="/remove/${item.cartIndex}">Remove</a></td>
 					</tr>
 				</c:forEach>
 				</tbody>
 			</table>
 			
 			<br>
-			<h6>Sub Total: $ ${sessionScope.cartTotal}</h6>
-			<h6>Taxes: $<c:out value="${sessionScope.cartTotal * .0925}"/></h6>
+			<h6>Sub Total: $ ${thisOrder.subtotal}</h6>
+			<h6>Taxes: $<c:out value="${thisOrder.tax}"/></h6>
 			<hr>
-			<h5>Total Charge: $ <c:out value="${sessionScope.cartTotal * 1.0925}"/></h5>
-			<form action="/update/contact" method="post">
-				<label for="myPhone">Confirm Phone:</label>
-				<input id="myPhone" name="myPhone" value="${sessionScope.myPhone}">
-				<button>Update</button>
-			</form>
+			<h5>Total Charge: $ <c:out value="${thisOrder.total}"/></h5>
+
 			
 			
 		</div>
 		<div class="contentFooter">
-		<a href="/checkout">Proceed To Checkout</a>
 		</div>
 	</div>
 	
 	<div class ="footer">
-		<img alt="logo" src="images/octopusLogo.png" class="headerLogo">
+		<img alt="logo" src="/images/octopusLogo.png" class="headerLogo">
 	</div>
 </div>
 </div>

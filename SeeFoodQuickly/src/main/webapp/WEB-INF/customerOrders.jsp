@@ -50,59 +50,36 @@
 	
 	<div class="content">
 		<div class="contentHeader">
-			
+			<h1>My Orders:</h1>
 		</div>
-				<div class="checkoutPad">
-					<h3>Your Order:</h3>
-					<hr>
-					<div class="checkout_table" style="border-style:solid; border-width: 1px; padding:15px; border-radius:5px" >
-						<table>
-							<tbody>
-							<c:forEach items="${sessionScope.myCart}" var="item">
-								<tr style="display:flex; flex-direction: row; justify-content: space-around; margin-bottom: 5px">
-									<td>(${item.quantity}) </td>
-									<td style="width:270px">${item.itemProduct.itemName}</td>
-									<td>$${item.lineTotal }</td>
-								</tr>
-							</c:forEach>
-							</tbody>
-						</table>
-					</div>
-					<hr>
-					<h6 style="display:flex; flex-direction:row; width:350px;justify-content: flex-end">Sub Total: $ ${sessionScope.cartTotal}</h6>
-					<h6 style="display:flex; flex-direction:row; width:350px;justify-content: flex-end">Taxes: $<c:out value="${sessionScope.cartTotal * .0925}" /></h6>
-					<h5 style="display:flex; flex-direction:row; width:350px;justify-content: flex-end">Total Charge: $<c:out value="${sessionScope.cartTotal * 1.0925}" /></h5>
-					<hr>
-					<!-- 							CREDIT CARD PROCESSING
- -->
-
-
-					<!--  Stripe block below.  But currently doesn't work -->
-					
-					<form action='/charge' method='POST' id='checkout-form' xmlns:th="http://www.w3.org/1999/xhtml">
-					    <input type='hidden' th:value='${amount/100}' name='amount' />
-					    <h1>Price:<span th:text='${amount/100}' /></h1>
-					    <script
-					            src='https://checkout.stripe.com/checkout.js'
-					            class='stripe-button'
-					            th:attr='data-key=${stripePublicKey},
-					         data-amount=${amount}'
-					            data-name='SFQ'
-					            data-description='Checkout'
-					            data-image='images/octopusLogo.png'
-					            data-locale='auto'
-					            data-zip-code='false'>
-					    </script>
-					</form>
-
-					<!--  Stripe block above.  But currently doesn't work -->
-
- 				<form action="/checkout" method="post">
-					<button>Order Submit [TEST]</button>
-
-				</form>
-				</div>
-				<div class="contentFooter">
+		<div class="contentBody">
+		
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>Order #:</th>
+						<th>Name</th>
+						<th>Phone:</th>
+						<th>Time Ordered:</th>
+						<th>Status:</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${orderList }" var="order">
+					<tr>
+					<td><a href="/orders/${order.id}">${order.orderNumber }</a></td>
+					<td>${order.customer.userName }</td>
+					<td>${order.orderPhone }</td>
+					<td>${order.createdAt }</td>
+					<td>${order.status}</td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		
+		</div>
+		<div class="contentFooter">
+		<h3><a href="/menu">Place New Order</a></h3>	 
 		</div>
 	</div>
 	
