@@ -297,15 +297,11 @@ public class HomeController {
 		@PostMapping("/checkout")
 		public String newOrder(HttpSession session) {
 			Order order = oServ.checkout(session);
-			
-			////  send twilio confirmation that order is received
-			String userName = (String)session.getAttribute("userName");
-			String userPhone = (String)session.getAttribute("userPhone");
-			
-			System.out.println("in home controller post checkout, user is: " + userName);
-			System.out.println("in home controller post checkout, phone is: " + userPhone);
-
-			
+			////  send Twilio confirmation that order is received
+			String phoneNumber = order.getOrderPhone();
+			String message = "Thank you for your order " + order.getCustomer().getUserName() +
+					"!  We have received your order number " + order.getOrderNumber();
+	    	twServ.sendSms(phoneNumber, message);
 			return "redirect:/success/" +order.getId();
 		}
 		

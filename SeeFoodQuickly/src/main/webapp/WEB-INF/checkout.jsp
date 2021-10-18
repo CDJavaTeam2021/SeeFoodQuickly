@@ -76,7 +76,27 @@
 					<hr>
 					<!-- 							CREDIT CARD PROCESSING
  -->
-				<form action="/checkout" method="post">
+					<!--  Stripe block below.  But currently doesn't work -->
+					
+					<form action='/charge' method='POST' id='checkout-form' xmlns:th="http://www.w3.org/1999/xhtml">
+					    <input type='hidden' th:value='${amount/100}' name='amount' />
+					    <h1>Price:<span th:text='${amount/100}' /></h1>
+					    <script
+					            src='https://checkout.stripe.com/checkout.js'
+					            class='stripe-button'
+					            th:attr='data-key=${stripePublicKey},
+					         data-amount=${amount}'
+					            data-name='SFQ'
+					            data-description='Checkout'
+					            data-image='images/octopusLogo.png'
+					            data-locale='auto'
+					            data-zip-code='false'>
+					    </script>
+					</form>
+
+					<!--  Stripe block above.  But currently doesn't work -->
+
+ 				<form action="/checkout" method="post">
 					<button>Order Submit [TEST]</button>
 				</form>
 				</div>

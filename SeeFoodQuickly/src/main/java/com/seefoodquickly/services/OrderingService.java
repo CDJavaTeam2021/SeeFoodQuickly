@@ -16,6 +16,7 @@ import com.seefoodquickly.repositories.ItemRepository;
 import com.seefoodquickly.repositories.OrderRepository;
 import com.seefoodquickly.repositories.ProductRepository;
 import com.seefoodquickly.repositories.UserRepository;
+import com.seefoodquickly.twilio.TwilioService;
 
 @Service
 public class OrderingService {
@@ -27,6 +28,9 @@ public class OrderingService {
 	
 	@Autowired
 	UserService uServ;
+	
+	@Autowired
+	TwilioService twServ;
 	
 	public OrderingService(ProductRepository pRepo, ItemRepository iRepo, OrderRepository oRepo, UserService uServ) {
 		this.pRepo = pRepo;
@@ -276,8 +280,10 @@ public class OrderingService {
 		Long orderId = Long.valueOf(orderIdStr);
 		Order order = oRepo.findById(orderId).get(); //Assumes already valid ID
 		order.setStatus("Confirmed");
-		//TODO add text notification function here
-		System.out.println(phone);
+		////  send Twilio confirmation that order is being prepared
+		String message = order.getCustomer().getUserName() + ", we are starting to prepare your order and it will be ready in 10 minutes";
+    	twServ.sendSms(phone, message);		
+		
 		oRepo.save(order);
 		return order.getOrderNumber(); //returns order number
 	}
@@ -287,8 +293,9 @@ public class OrderingService {
 		Order order = oRepo.findById(orderId).get(); //assumes id is correct
 		order.setStatus("Finished");
 		order.setOrderOpen(false);
-		//TODO add test notification here
-		System.out.println(phone);
+		////  send Twilio confirmation that order is complete
+		String message = order.getCustomer().getUserName() + ", your order is completed!";
+    	twServ.sendSms(phone, message);		
 		oRepo.save(order);
 	}
 	
