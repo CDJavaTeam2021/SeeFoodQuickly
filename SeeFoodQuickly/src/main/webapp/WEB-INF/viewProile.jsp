@@ -15,10 +15,11 @@
 <script src=“/webjars/bootstrap/js/bootstrap.min.js”></script>
 </head>
 <body>
+
 <div class="container">
 <div class="bodyStyle">
 
-		<div class="header">
+	<div class="nonUserHeader">
 		<nav class="navbar navbar-expand-lg navbar-light">
 		  <div class="container-fluid">
 		    <a class="navbar-brand" href="#">SFQ!</a>
@@ -49,56 +50,62 @@
 	</div>
 	
 	<div class="content">
-		<div class="contentHeader">
+		<h2><c:out value="${user.userName}"/>'s Profile</h2>
+		
+
+		<div class="reg_form">
+			<div class="formPad">
+
+			<div class="mb-3">
+			  <label for="userName" class="form-label">Name:</label>
+			  <input type="text" name="userName"class="form-control" placeholder="${user.userName}" disabled="disabled">
+			</div>
+			<div class="mb-3">
+			  <label for="userEmail" class="form-label">Email:</label>
+			  <input type="email" name="userEmail"class="form-control" placeholder="${user.userEmail}" disabled="disabled">
+			</div>
+			<div class="mb-3">
+			  <label for="userPhone" class="form-label">Phone:</label>
+			  <input type="text" name="userPhone"class="form-control" placeholder="${user.userPhone}" disabled="disabled">
+			</div>
+			<div class="mb-3">
+			  <label for="type" class="form-label">User Type:</label>
+			  <select disabled="disabled">
+			  <option selected value="${user.type}">${user.type}</option>
+		      <option value="customer">customer</option>
+		      <option value="employee">employee</option>
+		      <option value="admin">administrator</option>
+			  </select>
+			  <br>
+				<c:set var="loggedUser" value="${loggedUser}"/>
+				<c:set var="user" value="${user}"/>
+				<c:if test="${loggedUser == user}">
+				<a href="/profile/${loggedUser.id}/edit"> <button class="btn btn-outline-dark" type="button">Edit Profile</button></a>
+				</c:if>
+			</div>
+			</div>		
 		</div>
-		<div class="cartBody">
-			<h4>Order for: <c:out value="${loggedUser.userName}"/> </h4>
-			<h6>Contact: <c:out value="${loggedUser.userPhone}"/></h6>
-			<h6>Date: <fmt:formatDate type = "date" dateStyle = "long"  value = "${currentDate}" /></h6>
-			<br>
-			<table class="table table-striped table-hover">
-				<thead>
-					<tr>
-						<th>Item</th>
-						<th>Quantity</th>
-						<th>Charge</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-				<c:forEach items="${sessionScope.myCart}" var="item">
-					<tr>
-						<td>${item.itemProduct.itemName}</td>
-						<td>${item.quantity}</td>
-						<td>$${item.lineTotal }</td>
- 						<td><a href="/remove/${item.cartIndex}">Remove</a></td>
-					</tr>
-				</c:forEach>
-				</tbody>
-			</table>
-			
-			<br>
-			<h6>Sub Total: $ ${sessionScope.cartTotal}</h6>
-			<h6>Taxes: $<c:out value="${sessionScope.cartTotal * .0925}"/></h6>
-			<hr>
-			<h5>Total Charge: $ <c:out value="${sessionScope.cartTotal * 1.0925}"/></h5>
-			<form action="/update/contact" method="post">
-				<label for="myPhone">Confirm Phone:</label>
-				<input id="myPhone" name="myPhone" value="${sessionScope.myPhone}">
-				<button>Update</button>
-			</form>
-			
-			
+
+		
+		
 		</div>
-		<div class="contentFooter">
-		<a href="/checkout">Proceed To Checkout</a>
-		</div>
-	</div>
 	
 	<div class ="footer">
 		<img alt="logo" src="images/octopusLogo.png" class="headerLogo">
 	</div>
+
+
 </div>
 </div>
+<script>
+function phoneFormat(input) {//returns (###) ###-####
+    input = input.replace(/\D/g,'');
+    var size = input.length;
+    if (size>0) {input="("+input}
+    if (size>3) {input=input.slice(0,4)+") "+input.slice(4,11)}
+    if (size>6) {input=input.slice(0,9)+"-" +input.slice(9)}
+    return input;
+}
+</script>
 </body>
 </html>

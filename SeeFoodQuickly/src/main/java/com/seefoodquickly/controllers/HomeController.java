@@ -23,8 +23,8 @@ import com.seefoodquickly.models.User;
 import com.seefoodquickly.services.OrderingService;
 import com.seefoodquickly.services.ProductService;
 import com.seefoodquickly.services.UserService;
-import com.seefoodquickly.validators.UserValidator;
 import com.seefoodquickly.twilio.TwilioService;
+import com.seefoodquickly.validators.UserValidator;
 
 @Controller
 public class HomeController {
@@ -94,6 +94,7 @@ public class HomeController {
 			Long userId = (Long)session.getAttribute("userId");
 			User loggedUser = this.uServ.findUserById(userId);
 			model.addAttribute("loggedUser", loggedUser);
+			model.addAttribute("userId", userId);
 			
 			List<Product> allProducts = oServ.getAllProducts();
 			model.addAttribute("allProducts", allProducts);
@@ -177,6 +178,8 @@ public class HomeController {
 			}
 		}
 	
+	
+	//Open Order
 	@GetMapping("/orders/open")
 	public String queue(Model model, HttpSession session) {
 		if(session.getAttribute("permissions").equals("employee") || session.getAttribute("permissions").equals("admin")) {
@@ -210,6 +213,34 @@ public class HomeController {
 		}	
 	}
 	
+	// View Profile
+	@GetMapping("/profile/{id}")
+	public String viewProfile(@PathVariable("id")Long id, Model model, HttpSession session) {
+		Long userId = (Long)session.getAttribute("user__id");
+		User loggedUser = this.uServ.findUserById(userId);
+		model.addAttribute("loggedUser", loggedUser);
+		
+		User user = this.uServ.findUserById(id);
+		model.addAttribute("user", user);
+		
+		return "viewProile.jsp";
+	}
+	
+	
+	// Edit Profile
+		@GetMapping("/profile/{id}/edit")
+		public String editProfile(@PathVariable("id")Long id, Model model, HttpSession session) {
+			Long userId = (Long)session.getAttribute("user__id");
+			User loggedUser = this.uServ.findUserById(userId);
+			model.addAttribute("loggedUser", loggedUser);
+			
+			User user = this.uServ.findUserById(id);
+			model.addAttribute("user", user);
+			
+			return "editProfile.jsp";
+		}
+	
+	
 	//Add Product JSP
 	@GetMapping("/addProduct")
 
@@ -237,6 +268,7 @@ public class HomeController {
 		viewModel.addAttribute("orderList", oServ.myOrders(loggedUser));
 		return "customerOrders.jsp";
 	}
+	
 	
 	
 	///////////////////////////////////////////////  POST REQUESTS  //////////////////////////////////////////
@@ -269,6 +301,21 @@ public class HomeController {
 			uServ.login(session, newUser);
 			return "redirect:/menu";
 		}		
+	}
+	
+	// Edit Profile
+	@PostMapping("/editProfile/{id}")
+	public String updateProfile(@PathVariable("id")Long id, @RequestParam("userName") String userName, @RequestParam("userEmail") String userEmail,
+								@RequestParam("userPhone") String userPhone, @RequestParam("type") String type, 
+								Model model, HttpSession session) {
+		User user = uServ.findUserById(id);
+		user.setUserName(userName);
+		user.setUserEmail(userEmail);
+		user.setUserPhone(userPhone);
+		user.setType(type);
+		this.uServ.updateUser(user);
+
+		return "redirect:/profile/{id}";
 	}
 	
 	
