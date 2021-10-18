@@ -10,18 +10,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/v1/sms")
-public class Controller {
+public class TwilioController {
 
-    private final Service service;
+    private final TwilioService twServ;
 
     @Autowired
-    public Controller(Service service) {
-        this.service = service;
+    public TwilioController(TwilioService twServ) {
+        this.twServ = twServ;
     }
 
     @PostMapping
     public void sendSms(@Valid @RequestParam String phoneNumber, @RequestParam String message) {
-    	service.sendSms(phoneNumber, message);
+    	twServ.sendSms(phoneNumber, message);
     }
 
 }

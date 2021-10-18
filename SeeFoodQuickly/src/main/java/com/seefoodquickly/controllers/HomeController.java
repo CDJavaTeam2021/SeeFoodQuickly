@@ -24,6 +24,7 @@ import com.seefoodquickly.services.OrderingService;
 import com.seefoodquickly.services.ProductService;
 import com.seefoodquickly.services.UserService;
 import com.seefoodquickly.validators.UserValidator;
+import com.seefoodquickly.twilio.TwilioService;
 
 @Controller
 public class HomeController {
@@ -39,6 +40,9 @@ public class HomeController {
 	
 	@Autowired
 	OrderingService oServ;
+	
+	@Autowired
+	TwilioService twServ;
 
 	@GetMapping("/") // Initial Router
 	public String index(HttpSession session) {
@@ -248,6 +252,14 @@ public class HomeController {
 		@PostMapping("/checkout")
 		public String newOrder(HttpSession session) {
 			Order order = oServ.checkout(session);
+			
+			////  send twilio confirmation that order is received
+			String userName = (String)session.getAttribute("userName");
+			String userPhone = (String)session.getAttribute("userPhone");
+			
+			System.out.println("in home controller post checkout, user is: " + userName);
+			System.out.println("in home controller post checkout, phone is: " + userPhone);
+
 			
 			return "redirect:/success/" +order.getId();
 		}
