@@ -76,7 +76,22 @@
 					<td>${order.orderPhone }</td>
 					<td>${order.createdAt }</td>
 					<td>${order.status}</td>
-					<td style="display: flex; justify-content: space-between; margin-right:5px"><a style="color:black" href="">SMS</a>  <a style="color:red" href="">Delete</a></td>
+					<td style="display: flex; justify-content: space-between; margin-right:5px">
+						<c:choose>
+							<c:when test="${order.status == 'New'}">
+								<form action="/orders/confirm/${order.id}" method="post">
+									<input name="phone" type="hidden" value="${order.orderPhone}">
+									<button>Confirm</button>
+								</form>
+							</c:when>
+							<c:when test="${order.status == 'Confirmed'}">
+								<form action="/orders/complete/${order.id}" method="post">
+									<input name="phone" type="hidden" value="${order.orderPhone}">
+									<button>Complete</button>
+								</form>
+							</c:when>
+						</c:choose>
+					</td>
 					</tr>
 					</c:forEach>
 				</tbody>

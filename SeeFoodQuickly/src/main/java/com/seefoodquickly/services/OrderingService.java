@@ -272,21 +272,23 @@ public class OrderingService {
 		
 	}
 	
-	public String confirmOrder(String orderIdStr) {
+	public String confirmOrder(String orderIdStr, String phone) {
 		Long orderId = Long.valueOf(orderIdStr);
 		Order order = oRepo.findById(orderId).get(); //Assumes already valid ID
 		order.setStatus("Confirmed");
 		//TODO add text notification function here
+		System.out.println(phone);
 		oRepo.save(order);
 		return order.getOrderNumber(); //returns order number
 	}
 	
-	public void completeOrder(String orderIdStr) {
+	public void completeOrder(String orderIdStr, String phone) {
 		Long orderId = Long.valueOf(orderIdStr);
 		Order order = oRepo.findById(orderId).get(); //assumes id is correct
 		order.setStatus("Finished");
 		order.setOrderOpen(false);
 		//TODO add test notification here
+		System.out.println(phone);
 		oRepo.save(order);
 	}
 	
