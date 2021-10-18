@@ -75,7 +75,7 @@
 					<td><a href="/orders/${order.id}">${order.orderNumber }</a></td>
 					<td>${order.customer.userName }</td>
 					<td>${order.orderPhone }</td>
-					<td>${order.createdAt }</td>
+					<td><fmt:formatDate value="${order.createdAt}" pattern="MM-dd h:mm a"></fmt:formatDate></td>
 					<td>${order.status}</td>
 					<td style="display: flex; justify-content: space-between; margin-right:5px">
 						<c:choose>
