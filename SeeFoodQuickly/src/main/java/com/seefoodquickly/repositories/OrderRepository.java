@@ -13,8 +13,8 @@ public interface OrderRepository extends CrudRepository<Order, Long> {
 	
 	List<Order> findByOrderOpenIsOrderByCreatedAt(Boolean openState);
 	
-	List<Order> findAllByOrderByCreatedAt();
+	List<Order> findAllByOrderByCreatedAtDesc();
 	
-	List<Order> findByCustomerOrderByCreatedAt(User user);
+	List<Order> findByCustomerOrderByCreatedAtDesc(User user);
 
 }

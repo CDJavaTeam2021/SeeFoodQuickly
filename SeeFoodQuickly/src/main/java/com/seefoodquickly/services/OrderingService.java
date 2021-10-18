@@ -211,23 +211,23 @@ public class OrderingService {
 	
 	//Returns list of all orders ordered by most recent
 	public List<Order> getAllOrdersRecentFirst(){
-		return oRepo.findAllByOrderByCreatedAt();
+		return oRepo.findAllByOrderByCreatedAtDesc();
 	}
 	
 	//Returns orders belonging to specific customer ordered by most recent first
 	public List<Order> myOrders(String userIdStr){
 		Long userId = Long.valueOf(userIdStr);
 		User user = uRepo.findById(userId).get();
-		return oRepo.findByCustomerOrderByCreatedAt(user);
+		return oRepo.findByCustomerOrderByCreatedAtDesc(user);
 	}
 	
 	public List<Order> myOrders(Long userId){
 		User user = uRepo.findById(userId).get();
-		return oRepo.findByCustomerOrderByCreatedAt(user);
+		return oRepo.findByCustomerOrderByCreatedAtDesc(user);
 	}
 	
 	public List<Order> myOrders(User user){
-		return oRepo.findByCustomerOrderByCreatedAt(user);
+		return oRepo.findByCustomerOrderByCreatedAtDesc(user);
 	}
 
 	
