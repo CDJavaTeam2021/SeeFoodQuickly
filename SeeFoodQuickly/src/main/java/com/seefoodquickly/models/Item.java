@@ -2,6 +2,7 @@ package com.seefoodquickly.models;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -21,7 +23,7 @@ public class Item {
 
 	
 	
-	//Relationship attributes
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
@@ -38,6 +40,7 @@ public class Item {
 	@Transient
 	private int cartIndex; //tracks the index in the list representing the cart which is not persisted at checkout
 	
+	//Relationship attributes
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="order_id", updatable = true)
 	private Order parentOrder;
@@ -45,7 +48,7 @@ public class Item {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="product_id", updatable=true)
 	private Product itemProduct;
-
+	
 	@PrePersist
 	protected void onCreate() {
 		this.createdAt = new Date();

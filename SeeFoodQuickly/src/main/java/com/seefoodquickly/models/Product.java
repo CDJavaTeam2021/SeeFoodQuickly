@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -48,7 +49,8 @@ public class Product {
 	@OneToMany(mappedBy="itemProduct", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Item> items;
 	
-	
+	@OneToOne(mappedBy="product", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private Picture picture;
 	
 	@PrePersist
 	protected void onCreate() {
@@ -136,6 +138,14 @@ public class Product {
 		this.price = price;
 		this.makeMinutes = makeMinutes;
 		this.items = items;
+	}
+
+	public Picture getPicture() {
+		return picture;
+	}
+
+	public void setPicture(Picture picture) {
+		this.picture = picture;
 	}
 	
 	
