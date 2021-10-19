@@ -18,7 +18,7 @@
 <div class="container">
 <div class="bodyStyle">
 
-		<div class="header">
+	<div class="header">
 		<nav class="navbar navbar-expand-lg navbar-light">
 		  <div class="container-fluid">
 		    <a class="navbar-brand" href="#">SFQ!</a>
@@ -40,7 +40,8 @@
 			        </c:choose>
 			      </div>
 			      <div class="navbar-nav" style="align-content: flex-end;">
-			       	<a class="nav-link"><c:out value="${loggedUser.userName}" /></a>
+
+			       	<a class="nav-link" href="/profile/${loggedUser.id}"><c:out value="${loggedUser.userName}"/></a>
 			        <a class="nav-link" href="/logout">Logout</a>
 			      </div>
 		      	</div>

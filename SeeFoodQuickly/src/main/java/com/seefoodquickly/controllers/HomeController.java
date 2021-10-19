@@ -85,10 +85,10 @@ public class HomeController {
 	
 	
 	
-	// Order/Menu JSP
+	// Menu JSP
 	@GetMapping("/menu")							
 	public String menu(Model model, HttpSession session) {
-		if(session.getAttribute("userId")==null) {
+		if(session.getAttribute("userId") == null) {
 			return "menu.jsp";
 		} else {
 			Long userId = (Long)session.getAttribute("userId");
@@ -172,25 +172,50 @@ public class HomeController {
 					return "redirect:/my_orders";
 				} else {
 					model.addAttribute("loggedUser", loggedUser);
-					model.addAttribute("orderList", oServ.getAllOrdersRecentFirst());			
+					model.addAttribute("orderList", oServ.getAllOrdersRecentFirst());		
+					
+					//For styling the same JSP with two different Requests
+					String title="All Orders";
+					model.addAttribute("title", title);
 					return "orders.jsp";
 				}				
 			}
 		}
 	
 	
-	//Open Order
+	//Open Order NEW
 	@GetMapping("/orders/open")
 	public String queue(Model model, HttpSession session) {
-		if(session.getAttribute("permissions").equals("employee") || session.getAttribute("permissions").equals("admin")) {
-			User loggedUser = uServ.findUserById((Long) session.getAttribute("userId"));
-			model.addAttribute("loggedUser", loggedUser);
-			model.addAttribute("orderList", oServ.getOpenOrders());			
-			return "orders.jsp";
-		} else {
+		if(session.getAttribute("userId")==null) {
 			return "redirect:/";
+		} else {
+			Long userId = (Long)session.getAttribute("userId");
+			User loggedUser = this.uServ.findUserById(userId);
+			if (loggedUser.getType().equals("customer")) {
+				return "redirect:/";
+			} else {
+				model.addAttribute("loggedUser", loggedUser);
+				model.addAttribute("orderList", oServ.getOpenOrders());		
+				
+				//For styling the same JSP with two different Requests
+				String title="Open Orders";
+				model.addAttribute("title", title);
+				return "orders.jsp";
+			}				
 		}
 	}
+	
+//	//Open Order
+//	@GetMapping("/orders/open")
+//	public String queue(Model model, HttpSession session) {
+//		if(session.getAttribute("permissions").equals("employee") || session.getAttribute("permissions").equals("admin")) {
+//			User loggedUser = uServ.findUserById((Long) session.getAttribute("userId"));
+//					
+//			return "orders.jsp";
+//		} else {
+//			return "redirect:/";
+//		}
+//	}
 	
 	//View specific Order
 	@GetMapping("/orders/{order_id}")
@@ -216,42 +241,56 @@ public class HomeController {
 	// View Profile
 	@GetMapping("/profile/{id}")
 	public String viewProfile(@PathVariable("id")Long id, Model model, HttpSession session) {
-		Long userId = (Long)session.getAttribute("user__id");
-		User loggedUser = this.uServ.findUserById(userId);
-		model.addAttribute("loggedUser", loggedUser);
-		
-		User user = this.uServ.findUserById(id);
-		model.addAttribute("user", user);
-		
-		return "viewProile.jsp";
-	}
-	
-	
-	// Edit Profile
-		@GetMapping("/profile/{id}/edit")
-		public String editProfile(@PathVariable("id")Long id, Model model, HttpSession session) {
-			Long userId = (Long)session.getAttribute("user__id");
+		if(session.getAttribute("userId")==null) {
+			return "redirect:/";
+		} else {
+			Long userId = (Long)session.getAttribute("userId");
 			User loggedUser = this.uServ.findUserById(userId);
 			model.addAttribute("loggedUser", loggedUser);
 			
 			User user = this.uServ.findUserById(id);
 			model.addAttribute("user", user);
 			
+			
+			return "viewProfile.jsp";
+		}
+	}
+	
+	
+	// Edit Profile
+		@GetMapping("/profile/{id}/edit")
+	public String editProfile(@PathVariable("id")Long id, Model model, HttpSession session) {
+		if(session.getAttribute("userId")==null) {
+			return "redirect:/";
+		} else {
+			Long userId = (Long)session.getAttribute("userId");
+			User loggedUser = this.uServ.findUserById(userId);
+			model.addAttribute("loggedUser", loggedUser);
+			
+			User user = this.uServ.findUserById(id);
+			model.addAttribute("user", user);
+		
 			return "editProfile.jsp";
 		}
+	}
 	
 	
 	//Add Product JSP
 	@GetMapping("/addProduct")
-
 	public String addProduct(@ModelAttribute("product") Product product, Model model, HttpSession session) {
 
-			if(session.getAttribute("userId")==null || session.getAttribute("permissions").equals("customer")) {
+			if(session.getAttribute("userId")==null) {
 				return "redirect:/";
 			} else {
 				Long userId = (Long)session.getAttribute("userId");
 				User loggedUser = this.uServ.findUserById(userId);
-				model.addAttribute("loggedUser", loggedUser);
+				if(loggedUser.getType().equals("customer")) {
+					return "redirect:/";
+				} else {
+					model.addAttribute("loggedUser", loggedUser);
+				}
+				
+				
 				
 				
 				

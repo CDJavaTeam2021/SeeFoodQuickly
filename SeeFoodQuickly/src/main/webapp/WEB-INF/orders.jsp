@@ -41,7 +41,8 @@
 			        </c:choose>
 			      </div>
 			      <div class="navbar-nav" style="align-content: flex-end;">
-			       	<a class="nav-link"><c:out value="${loggedUser.userName}" /></a>
+
+			       	<a class="nav-link" href="/profile/${loggedUser.id}"><c:out value="${loggedUser.userName}"/></a>
 			        <a class="nav-link" href="/logout">Logout</a>
 			      </div>
 		      	</div>
@@ -51,7 +52,7 @@
 	
 	<div class="content">
 		<div class="contentHeader">
-			<h1>Order History:</h1>
+			<h1><c:out value="${title}"/></h1>
 		</div>
 		<div class="contentBody">
 		

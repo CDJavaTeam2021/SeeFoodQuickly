@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="/css/style.css"/>
 <script type="text/javascript" src=“js/app.js”></script>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <script src=“/webjars/bootstrap/js/bootstrap.min.js”></script>
@@ -19,7 +19,7 @@
 <div class="container">
 <div class="bodyStyle">
 
-	<div class="nonUserHeader">
+	<div class="header">
 		<nav class="navbar navbar-expand-lg navbar-light">
 		  <div class="container-fluid">
 		    <a class="navbar-brand" href="#">SFQ!</a>
@@ -41,7 +41,8 @@
 			        </c:choose>
 			      </div>
 			      <div class="navbar-nav" style="align-content: flex-end;">
-			       	<a class="nav-link"><c:out value="${loggedUser.userName}" /></a>
+
+			       	<a class="nav-link" href="/profile/${loggedUser.id}"><c:out value="${loggedUser.userName}"/></a>
 			        <a class="nav-link" href="/logout">Logout</a>
 			      </div>
 		      	</div>
@@ -56,39 +57,39 @@
 				<div class="formPad">
 					<div class="mb-3">
 					  <label for="userName" class="form-label">Name:</label>
-					  <input type="text" name="userName"class="form-control" value="${user.userName}">
+					  <input type="text" name="userName"class="form-control" style="width:250px" value="${user.userName}">
 					</div>
 					<div class="mb-3">
 					  <label for="userEmail" class="form-label">Email:</label>
-					  <input type="email" name="userEmail"class="form-control" value="${user.userEmail}">
+					  <input type="email" name="userEmail"class="form-control" style="width:250px" value="${user.userEmail}">
 					</div>
 					<div class="mb-3">
 					  <label for="userPhone" class="form-label">Phone:</label>
-					  <input type="text" name="userPhone"class="form-control" id="phone" onInput="this.value = phoneFormat(this.value)" value="${user.userPhone}">
+					  <input type="text" name="userPhone"class="form-control" id="phone" onInput="this.value = phoneFormat(this.value)" style="width:250px" value="${user.userPhone}">
 					</div>
 					<div class="mb-3">
 					  <label for="type" class="form-label">Select Type:</label>
-					  <select name="type">
-					  <option selected value="${user.type}"></option>
+					  <select class="form-select" name="type" style="width:200px">
+					  <option selected value="${user.type}"><c:out value="${user.type}"/>  </option>
 				      <option value="customer">customer</option>
 				      <option value="employee">employee</option>
 				      <option value="admin">administrator</option>
 					  </select>
+					</div>
 					  <br>
 					  	<c:set var="loggedUser" value="${loggedUser}"/>
 						<c:set var="user" value="${user}"/>
 						<c:if test="${loggedUser == user}">
-						<button class="btn btn-outline-dark" type="submit">Confirm Edit</button>
-						</c:if>
-					</div>
+						<button class="btn btn-outline-warning" type="submit">Confirm Edit</button>
+						</c:if>					
 				</div>		
 				</form>
-	
+			
 		</div>
 	</div>
 	
 	<div class ="footer">
-		<img alt="logo" src="images/octopusLogo.png" class="headerLogo">
+		<img alt="logo" src="/images/octopusLogo.png" class="headerLogo">
 	</div>
 
 
