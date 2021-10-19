@@ -56,7 +56,7 @@
 				<div class="checkoutPad">
 					<h3>Your Order:</h3>
 					<hr>
-					<div class="checkout_table" style="border-style:solid; border-width: 1px; padding:15px; border-radius:5px" >
+					<div class="checkout_table" style="border-style:solid; border-width: 2px; border-color:orange; ;padding:15px; height: 300px;border-radius:5px; overflow-y:scroll " >
 						<table>
 							<tbody>
 							<c:forEach items="${sessionScope.myCart}" var="item">
@@ -82,7 +82,7 @@
 					
 					<form action='/charge' method='POST' id='checkout-form' xmlns:th="http://www.w3.org/1999/xhtml">
 					    <input type='hidden' th:value='${amount/100}' name='amount' />
-					    <h1>Price:<span th:text='${amount/100}' /></h1>
+					   <%--  <h1>Price:<span th:text='${amount/100}' /></h1> --%>
 					    <script
 					            src='https://checkout.stripe.com/checkout.js'
 					            class='stripe-button'
@@ -103,7 +103,7 @@
 
 				</form>
 				</div>
-				<div class="contentFooter">
+		<div class="contentFooter">
 		</div>
 	</div>
 	
