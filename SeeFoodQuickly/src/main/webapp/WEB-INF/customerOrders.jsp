@@ -28,6 +28,7 @@
 			    <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="display:flex; justify-content: space-between">
 			      <div class="navbar-nav" style="align-items: flex-start;">
 			        <a class="nav-link" href="/menu">Menu</a>
+			        <a class="nav-link" href="/about">About See Food Quickly</a>
 			        <c:choose>
 			        	<c:when test="${loggedUser.type == 'employee' || loggedUser.type == 'admin' }">
 			        		<a class="nav-link" href="/addProduct">Add Product</a>

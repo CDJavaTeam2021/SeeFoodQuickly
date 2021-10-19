@@ -90,6 +90,18 @@ public class HomeController {
 		}
 	}
 	
+	//Static about page
+	@GetMapping("/about")
+	public String aboutPage(HttpSession session, Model model) {
+		if(session.getAttribute("userId") != null) {
+			Long userId = (Long)session.getAttribute("userId");
+			User loggedUser = this.uServ.findUserById(userId);
+			model.addAttribute("loggedUser", loggedUser);
+			model.addAttribute("userId", userId);
+		}
+		return "about.jsp";
+	}
+	
 	
 	
 	// Menu JSP
