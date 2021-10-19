@@ -56,38 +56,40 @@
 			<h6>Contact: <c:out value="${loggedUser.userPhone}"/></h6>
 			<h6>Date: <fmt:formatDate type = "date" dateStyle = "long"  value = "${currentDate}" /></h6>
 			<br>
-			<table class="table table-striped table-hover">
-				<thead>
-					<tr>
-						<th>Item</th>
-						<th>Quantity</th>
-						<th>Charge</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-				<c:forEach items="${sessionScope.myCart}" var="item">
-					<tr>
-						<td>${item.itemProduct.itemName}</td>
-						<td>${item.quantity}</td>
-						<td><fmt:formatNumber value = "${item.lineTotal}" type = "currency"/></td>
- 						<td><a href="/remove/${item.cartIndex}">Remove</a></td>
-					</tr>
-				</c:forEach>
-				</tbody>
-			</table>
-			
+			<div style="height: 200px;width:100%; overflow-y: scroll">
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th>Item</th>
+							<th>Quantity</th>
+							<th>Charge</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+					<c:forEach items="${sessionScope.myCart}" var="item">
+						<tr>
+							<td>${item.itemProduct.itemName}</td>
+							<td>${item.quantity}</td>
+							<td><fmt:formatNumber value = "${item.lineTotal}" type = "currency"/></td>
+	 						<td><a href="/remove/${item.cartIndex}">Remove</a></td>
+						</tr>
+					</c:forEach>
+					</tbody>
+				</table>
+			</div>
 			<br>
-			<h6>Sub Total: <fmt:formatNumber value = "${sessionScope.cartTotal}" type = "currency"/></h6>
-			<h6>Taxes: <fmt:formatNumber value = "${sessionScope.cartTotal * 0.0925}" type = "currency"/></h6>
-			<hr>
-			<h5>Total Charge: <fmt:formatNumber value = "${sessionScope.cartTotal * 1.0925}" type = "currency"/></h5>
-			<form action="/update/contact" method="post">
-				<label for="myPhone">Confirm Phone:</label>
-				<input id="myPhone" name="myPhone" value="${sessionScope.myPhone}">
-				<button>Update</button>
-			</form>
-			
+			<div style="width:100%; display:flex; flex-direction: column; align-items: flex-end; padding-right:15px">
+				<h6>Sub Total: <fmt:formatNumber value = "${sessionScope.cartTotal}" type = "currency"/></h6>
+				<h6>Taxes: <fmt:formatNumber value = "${sessionScope.cartTotal * 0.0925}" type = "currency"/></h6>
+				<hr>
+				<h5>Total Charge: <fmt:formatNumber value = "${sessionScope.cartTotal * 1.0925}" type = "currency"/></h5>
+			</div>
+				<form action="/update/contact" method="post" style="display:flex; align-items:center; width:100%; justify-content:flex-end">
+					<label for="myPhone">Confirm Phone#:</label>
+					<input style="margin-left:10px; margin-right:10px" id="myPhone" name="myPhone" value="${sessionScope.myPhone}">	
+					<button type="submit" style="height: 30px; margin-left:15px">Update</button>
+				</form>
 			
 		</div>
 		<div class="contentFooter">
