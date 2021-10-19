@@ -41,7 +41,7 @@
 			      </div>
 			      <div class="navbar-nav" style="align-content: flex-end;">
 
-			       	<a class="nav-link"><c:out value="${loggedUser.userName}" /></a>
+			       	<a class="nav-link" href="/profile/${loggedUser.id}"><c:out value="${loggedUser.userName}"/></a>
 			        <a class="nav-link" href="/logout">Logout</a>
 			      </div>
 		      	</div>
@@ -50,9 +50,20 @@
 	</div>
 	
 	<div class="content">
-		<div class="contentHeader">
-			<h1>Menu:</h1>
+		<div class="menuHeader">
+			<h1 style="display:flex; align-items: center">Menu:</h1>
+			<div style="display:flex; align-items: center">
+				<h2 style="margin-right:15px">My Cart: </h2>
+				<div style="display:flex; flex-direction:column; justify-content:center; padding:8px; width:200px; height: 120px; background-color:white; border-style:solid; border-width: 2px; border-color: green; overflow-y:scroll ">
+				<ul>	
+					<c:forEach items="${sessionScope.myCart}" var="item">
+						<li style="font-size: small">(${item.quantity}) ${item.itemProduct.itemName}</li>
+					</c:forEach>	
+				</ul>
+				</div>
+			</div>
 		</div>
+		
 		<div class="menuBody">
 			<c:forEach items="${allProducts}" var="product">
 				<div class="card" style="width: 15rem; display:flex; flex-direction: column; padding:5px; align-items: center; height:300px; margin-bottom:15px; border-color:rgb(64, 194, 198);">

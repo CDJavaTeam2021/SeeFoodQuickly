@@ -73,16 +73,12 @@
 				</p>
 			<button type="submit" style="margin-left:140px">Submit</button>
 		</form:form>
-		</div>
-
-		
-		
-		</div>
+		</div>	
+	</div>
 	
 	<div class ="footer">
 		<img alt="logo" src="images/octopusLogo.png" class="headerLogo">
 	</div>
-
 
 </div>
 </div>
