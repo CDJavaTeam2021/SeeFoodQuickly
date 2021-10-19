@@ -70,7 +70,7 @@
 					<tr>
 						<td>${item.itemProduct.itemName}</td>
 						<td>${item.quantity}</td>
-						<td>$${item.lineTotal }</td>
+						<td><fmt:formatNumber value = "${item.lineTotal}" type = "currency"/></td>
  						<td><a href="/remove/${item.cartIndex}">Remove</a></td>
 					</tr>
 				</c:forEach>
@@ -78,10 +78,10 @@
 			</table>
 			
 			<br>
-			<h6>Sub Total: $ ${sessionScope.cartTotal}</h6>
-			<h6>Taxes: $<c:out value="${sessionScope.cartTotal * .0925}"/></h6>
+			<h6>Sub Total: <fmt:formatNumber value = "${sessionScope.cartTotal}" type = "currency"/></h6>
+			<h6>Taxes: <fmt:formatNumber value = "${sessionScope.cartTotal * 0.0925}" type = "currency"/></h6>
 			<hr>
-			<h5>Total Charge: $ <c:out value="${sessionScope.cartTotal * 1.0925}"/></h5>
+			<h5>Total Charge: <fmt:formatNumber value = "${sessionScope.cartTotal * 1.0925}" type = "currency"/></h5>
 			<form action="/update/contact" method="post">
 				<label for="myPhone">Confirm Phone:</label>
 				<input id="myPhone" name="myPhone" value="${sessionScope.myPhone}">
