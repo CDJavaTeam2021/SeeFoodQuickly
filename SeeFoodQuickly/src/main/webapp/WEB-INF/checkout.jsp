@@ -63,16 +63,16 @@
 								<tr style="display:flex; flex-direction: row; justify-content: space-around; margin-bottom: 5px">
 									<td>(${item.quantity}) </td>
 									<td style="width:270px">${item.itemProduct.itemName}</td>
-									<td>$${item.lineTotal }</td>
+									<td><fmt:formatNumber value = "${item.lineTotal}" type = "currency"/></td>
 								</tr>
 							</c:forEach>
 							</tbody>
 						</table>
 					</div>
 					<hr>
-					<h6 style="display:flex; flex-direction:row; width:350px;justify-content: flex-end">Sub Total: $ ${sessionScope.cartTotal}</h6>
-					<h6 style="display:flex; flex-direction:row; width:350px;justify-content: flex-end">Taxes: $<c:out value="${sessionScope.cartTotal * .0925}" /></h6>
-					<h5 style="display:flex; flex-direction:row; width:350px;justify-content: flex-end">Total Charge: $<c:out value="${sessionScope.cartTotal * 1.0925}" /></h5>
+					<h6 style="display:flex; flex-direction:row; width:350px;justify-content: flex-end">Sub Total: <fmt:formatNumber value = "${sessionScope.cartTotal}" type = "currency"/></h6>
+					<h6 style="display:flex; flex-direction:row; width:350px;justify-content: flex-end">Taxes: <fmt:formatNumber value = "${sessionScope.cartTotal * 0.0925}" type = "currency"/></h6>
+					<h5 style="display:flex; flex-direction:row; width:350px;justify-content: flex-end">Total Charge: <fmt:formatNumber value = "${sessionScope.cartTotal * 1.0925}" type = "currency"/></h5>
 					<hr>
 					<!-- 							CREDIT CARD PROCESSING
  -->

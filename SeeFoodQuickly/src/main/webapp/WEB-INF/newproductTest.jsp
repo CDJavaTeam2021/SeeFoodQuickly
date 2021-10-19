@@ -69,6 +69,15 @@
 						<form:button>Save Item!</form:button>
 
 					</form:form>
+					
+					<form action="/test/upload" method="post" enctype="multipart/form-data">
+						<input type="file" name="image">
+						<button>Upload!</button>
+					</form>
+					
+					<c:forEach items="${pictures}" var="picture">
+						<img src="${picture.url}" alt="${picture.description}">
+					</c:forEach>
 
 				</div>
 		<div class="contentFooter">

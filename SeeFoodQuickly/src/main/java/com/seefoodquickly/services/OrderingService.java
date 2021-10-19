@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 
 import com.seefoodquickly.models.Item;
 import com.seefoodquickly.models.Order;
+import com.seefoodquickly.models.Picture;
 import com.seefoodquickly.models.Product;
 import com.seefoodquickly.models.User;
 import com.seefoodquickly.repositories.ItemRepository;
 import com.seefoodquickly.repositories.OrderRepository;
+import com.seefoodquickly.repositories.PictureRepository;
 import com.seefoodquickly.repositories.ProductRepository;
 import com.seefoodquickly.repositories.UserRepository;
 import com.seefoodquickly.twilio.TwilioService;
@@ -25,6 +27,7 @@ public class OrderingService {
 	ItemRepository iRepo;
 	OrderRepository oRepo;
 	UserRepository uRepo;
+	PictureRepository picRepo;
 	
 	@Autowired
 	UserService uServ;
@@ -32,11 +35,12 @@ public class OrderingService {
 	@Autowired
 	TwilioService twServ;
 	
-	public OrderingService(ProductRepository pRepo, ItemRepository iRepo, OrderRepository oRepo, UserService uServ) {
+	public OrderingService(ProductRepository pRepo, ItemRepository iRepo, OrderRepository oRepo, UserService uServ, PictureRepository picRepo) {
 		this.pRepo = pRepo;
 		this.iRepo = iRepo;
 		this.oRepo = oRepo;
 		this.uServ = uServ;
+		this.picRepo = picRepo;
 	}
 	
 	//Product Methods
@@ -85,6 +89,17 @@ public class OrderingService {
 	//overloaded delete method that accepts the Product
 	public void deleteProduct(Product product) {
 		pRepo.delete(product);
+	}
+	
+	//Product Picture
+	public Picture addPicture(String url, String description, Product product) {
+		Picture picture = new Picture(url, description, product);
+		picRepo.save(picture);
+		return picture;
+	}
+	
+	public List<Picture> allPictures(){
+		return (List<Picture>) picRepo.findAll();
 	}
 	
 	
@@ -211,23 +226,23 @@ public class OrderingService {
 	
 	//Returns list of all orders ordered by most recent
 	public List<Order> getAllOrdersRecentFirst(){
-		return oRepo.findAllByOrderByCreatedAt();
+		return oRepo.findAllByOrderByCreatedAtDesc();
 	}
 	
 	//Returns orders belonging to specific customer ordered by most recent first
 	public List<Order> myOrders(String userIdStr){
 		Long userId = Long.valueOf(userIdStr);
 		User user = uRepo.findById(userId).get();
-		return oRepo.findByCustomerOrderByCreatedAt(user);
+		return oRepo.findByCustomerOrderByCreatedAtDesc(user);
 	}
 	
 	public List<Order> myOrders(Long userId){
 		User user = uRepo.findById(userId).get();
-		return oRepo.findByCustomerOrderByCreatedAt(user);
+		return oRepo.findByCustomerOrderByCreatedAtDesc(user);
 	}
 	
 	public List<Order> myOrders(User user){
-		return oRepo.findByCustomerOrderByCreatedAt(user);
+		return oRepo.findByCustomerOrderByCreatedAtDesc(user);
 	}
 
 	

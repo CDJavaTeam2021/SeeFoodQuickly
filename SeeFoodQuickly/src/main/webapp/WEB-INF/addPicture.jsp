@@ -9,8 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/style.css"/>
-<script type="text/javascript" src=“js/app.js”></script>
+<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+<script type="text/javascript" src=“/js/app.js”></script>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <script src=“/webjars/bootstrap/js/bootstrap.min.js”></script>
 </head>
@@ -40,63 +40,29 @@
 			        </c:choose>
 			      </div>
 			      <div class="navbar-nav" style="align-content: flex-end;">
-
-			       	<a class="nav-link" href="/profile/${loggedUser.id}"><c:out value="${loggedUser.userName}"/></a>
+			       	<a class="nav-link"><c:out value="${loggedUser.userName}" /></a>
 			        <a class="nav-link" href="/logout">Logout</a>
 			      </div>
 		      	</div>
 		  </div>
 		</nav>
 	</div>
+	
 	<div class="content">
 		<div class="contentHeader">
+			<h1>Add Photo for ${newProduct.itemName }</h1>
 		</div>
-		<div class="cartBody">
-			<h4>Order for: <c:out value="${loggedUser.userName}"/> </h4>
-			<h6>Contact: <c:out value="${loggedUser.userPhone}"/></h6>
-			<h6>Date: <fmt:formatDate type = "date" dateStyle = "long"  value = "${currentDate}" /></h6>
-			<br>
-			<table class="table table-striped table-hover">
-				<thead>
-					<tr>
-						<th>Item</th>
-						<th>Quantity</th>
-						<th>Charge</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-				<c:forEach items="${sessionScope.myCart}" var="item">
-					<tr>
-						<td>${item.itemProduct.itemName}</td>
-						<td>${item.quantity}</td>
-						<td><fmt:formatNumber value = "${item.lineTotal}" type = "currency"/></td>
- 						<td><a href="/remove/${item.cartIndex}">Remove</a></td>
-					</tr>
-				</c:forEach>
-				</tbody>
-			</table>
-			
-			<br>
-			<h6>Sub Total: <fmt:formatNumber value = "${sessionScope.cartTotal}" type = "currency"/></h6>
-			<h6>Taxes: <fmt:formatNumber value = "${sessionScope.cartTotal * 0.0925}" type = "currency"/></h6>
-			<hr>
-			<h5>Total Charge: <fmt:formatNumber value = "${sessionScope.cartTotal * 1.0925}" type = "currency"/></h5>
-			<form action="/update/contact" method="post">
-				<label for="myPhone">Confirm Phone:</label>
-				<input id="myPhone" name="myPhone" value="${sessionScope.myPhone}">
-				<button>Update</button>
+		
+		<div class="reg_form">
+			<form action="/addPicture/${newProduct.id }" method="post" enctype="multipart/form-data">
+					<input type="file" name="image">
+					<button>Upload!</button>
 			</form>
-			
-			
-		</div>
-		<div class="contentFooter">
-		<a href="/checkout">Proceed To Checkout</a>
 		</div>
 	</div>
 	
 	<div class ="footer">
-		<img alt="logo" src="images/octopusLogo.png" class="headerLogo">
+		<img alt="logo" src="/images/octopusLogo.png" class="headerLogo">
 	</div>
 </div>
 </div>

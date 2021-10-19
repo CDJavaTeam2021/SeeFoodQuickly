@@ -67,12 +67,20 @@
 		<div class="menuBody">
 			<c:forEach items="${allProducts}" var="product">
 				<div class="card" style="width: 15rem; display:flex; flex-direction: column; padding:5px; align-items: center; height:300px; margin-bottom:15px; border-color:rgb(64, 194, 198);">
-  					<img src="images/productImage.png" class="card-img-top" alt="productImage" style="width:60px; height:60px">
+  					<c:choose>
+  						<c:when test="${product.picture == null }">
+  							<img src="images/productImage.png" class="card-img-top" alt="productImage" style="width:60px; height:60px">
+  						</c:when>
+  						<c:otherwise>
+  							<img src="${product.picture.url}" class="card-img-top" alt="${product.picture.description}" style="width:60px; height:60px">
+  						</c:otherwise>
+  					
+  					</c:choose>
+  					
   					<div class="card-body" style="display:flex; flex-direction:column; align-items: center">
    						 <h6 class="card-title"> <c:out value="${product.itemName}"/> </h6>
     					 <p class="card-text" style="font-size: small;"> <c:out value="${product.description}"/></p>
-    					 
-    					 
+     					 <p class="card-text" style="font-size: small;"> <fmt:formatNumber value="${product.price}" type="currency"/></p>			 
    						 <form action="/addItemToCart/${product.id}" method="POST">
    						 	<label style="font-size: small;">Choose Amount:</label>
    						 	<select name="quantity" class="form-select" aria-label="Default select example" style="width:75px; font-size: small;">
