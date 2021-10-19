@@ -89,6 +89,7 @@
 	</div>
 	
 	<div class ="footer">
+	
 		<img alt="logo" src="/images/octopusLogo.png" class="headerLogo">
 	</div>
 
