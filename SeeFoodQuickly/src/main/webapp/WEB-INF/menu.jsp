@@ -66,13 +66,13 @@
 		
 		<div class="menuBody">
 			<c:forEach items="${allProducts}" var="product">
-				<div class="card" style="width: 15rem; display:flex; flex-direction: column; padding:5px; align-items: center; height:300px; margin-bottom:15px; border-color:rgb(64, 194, 198);">
+				<div class="card" style="width: 15rem; display:flex; flex-direction: column; padding:5px; align-items: center; height:410px; margin-bottom:15px; border-color:rgb(64, 194, 198);">
   					<c:choose>
   						<c:when test="${product.picture == null }">
-  							<img src="images/productImage.png" class="card-img-top" alt="productImage" style="width:60px; height:60px">
+  							<img src="images/productImage.png" class="card-img-top" alt="productImage" style="width:150px; height:150px">
   						</c:when>
   						<c:otherwise>
-  							<img src="${product.picture.url}" class="card-img-top" alt="${product.picture.description}" style="width:60px; height:60px">
+  							<img src="${product.picture.url}" class="card-img-top" alt="${product.picture.description}" style="width:150px; height:150px">
   						</c:otherwise>
   					
   					</c:choose>

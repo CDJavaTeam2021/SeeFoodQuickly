@@ -448,7 +448,7 @@ public class HomeController {
 				Files.write(path, bytes);
 				String url = SHORTPATH + file.getOriginalFilename();
 				System.out.println(url);
-				oServ.addPicture(url, "new pic", product);				
+				oServ.addPicture(url, "Picture of " + product.getItemName() , product);				
 				return "redirect:/addProduct";
 			} catch(Exception e) {
 				return "redirect:/addPicture/{prod_id}";
