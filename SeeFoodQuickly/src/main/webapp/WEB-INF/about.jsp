@@ -28,7 +28,6 @@
 			    <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="display:flex; justify-content: space-between">
 			      <div class="navbar-nav" style="align-items: flex-start;">
 			        <a class="nav-link" href="/menu">Menu</a>
-			        <a class="nav-link" href="/about">About See Food Quickly</a>
 			        <c:choose>
 			        	<c:when test="${loggedUser.type == 'employee' || loggedUser.type == 'admin' }">
 			        		<a class="nav-link" href="/addProduct">Add Product</a>
@@ -52,17 +51,18 @@
 	
 	<div class="content">
 		<div class="contentHeader">
-		<h3>Thank You!</h3>
+			<h1>Our Story:</h1>
 		</div>
-		<div class="successBody">
-		<h4 style="color:green">Success!  Your order has been placed!</h4>
-		<h5>Your order number is ${newOrder.orderNumber }</h5>
-		<h6 style="color:green">A text message has been sent to: <c:out value="${loggedUser.userName}"/> at <c:out value="${newOrder.orderPhone}"/>.</h6>
-		<br>
-		<a href="/orders/${newOrder.id }"><button>Check Order Status</button></a>
-		</div>
-		<div class="contentFooter">
-		</div>
+		<div class="contentBody aboutBody">
+			<img src="/images/Jimmy_O._Yang.png" alt="founder">
+					<div class="aboutQuote">
+						<h3>"Question for you; what is better than recipe for octopus? </h3>
+						<h3> Answer for you; EIGHT recipes for octopus! </h3>
+						<h3>My grandmother gave me family recipe for octopus before she die in a horrible way."</h3>
+					</div>
+
+				</div>
+
 	</div>
 	
 	<div class ="footer">
