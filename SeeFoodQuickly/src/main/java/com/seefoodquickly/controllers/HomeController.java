@@ -1,5 +1,8 @@
 package com.seefoodquickly.controllers;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.seefoodquickly.models.Order;
@@ -43,6 +47,9 @@ public class HomeController {
 	
 	@Autowired
 	TwilioService twServ;
+	
+	public static String FOLDERPATH = "src/main/resources/static/images/products/";
+	public static String SHORTPATH = "images/products/";
 
 	@GetMapping("/") // Initial Router
 	public String index(HttpSession session) {
@@ -243,7 +250,6 @@ public class HomeController {
 	
 	//Add Product JSP
 	@GetMapping("/addProduct")
-
 	public String addProduct(@ModelAttribute("product") Product product, Model model, HttpSession session) {
 
 			if(session.getAttribute("userId")==null || session.getAttribute("permissions").equals("customer")) {
@@ -252,12 +258,25 @@ public class HomeController {
 				Long userId = (Long)session.getAttribute("userId");
 				User loggedUser = this.uServ.findUserById(userId);
 				model.addAttribute("loggedUser", loggedUser);
-				
-				
-				
 				return "addProduct.jsp";
 			}
 		}
+	
+	//Add image to product
+	@GetMapping("/addPicture/{prod_id}")
+	public String addPicture(HttpSession session, Model model, @PathVariable("prod_id") String prodIdStr) {
+		if(session.getAttribute("userId")==null || session.getAttribute("permissions").equals("customer")) {
+			return "redirect:/";
+		} else {
+			Long userId = (Long)session.getAttribute("userId");
+			User loggedUser = this.uServ.findUserById(userId);
+			Long prodId = Long.valueOf(prodIdStr);
+			Product product = oServ.getProductById(prodId);
+			model.addAttribute("loggedUser", loggedUser);
+			model.addAttribute("newProduct", product);
+			return "addPicture.jsp";
+		}
+	}
 	
 	//MyOrderHistory
 	@GetMapping("/my_orders")
@@ -321,9 +340,11 @@ public class HomeController {
 	
 	// Create Product
 	@PostMapping("/addProduct")
-	public String addProduct(@Valid @ModelAttribute("product") Product product, BindingResult result) {
+	public String addProduct(@Valid 
+			@ModelAttribute("product") Product product, 
+			BindingResult result) {
 			oServ.saveProduct(product);
-		return "redirect:/menu";
+		return "redirect:/addPicture/" + product.getId();
 	}
 	
 	// Add to Cart
@@ -372,6 +393,29 @@ public class HomeController {
 				@PathVariable("order_id") String orderIdStr) {
 			oServ.completeOrder(orderIdStr, notifyPhone);
 			return "redirect:/orders/open";
+		}
+		
+		@PostMapping("/addPicture/{prod_id}")
+		public String uploadPicture(@PathVariable("prod_id") String prodIdStr, @RequestParam("image") MultipartFile file) {
+			Long prodId = Long.valueOf(prodIdStr);
+			Product product = oServ.getProductById(prodId);
+			if(file.isEmpty()) {
+				return "redirect:/addProduct";
+			}
+			try {
+				System.out.println("getting the file");
+				byte[] bytes = file.getBytes();
+				Path path = Paths.get(FOLDERPATH + file.getOriginalFilename());
+				Files.write(path, bytes);
+				String url = SHORTPATH + file.getOriginalFilename();
+				System.out.println(url);
+				oServ.addPicture(url, "new pic", product);				
+				return "redirect:/addProduct";
+			} catch(Exception e) {
+				return "redirect:/addPicture/{prod_id}";
+			}
+			
+			
 		}
 	
 	

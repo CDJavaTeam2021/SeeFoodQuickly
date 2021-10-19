@@ -66,6 +66,8 @@ public class Product {
 	
 	public Product() {
 	}
+	
+	
 
 	//Getters and setters
 	public Long getId() {

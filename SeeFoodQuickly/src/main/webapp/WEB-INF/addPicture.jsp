@@ -9,8 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/style.css"/>
-<script type="text/javascript" src=“js/app.js”></script>
+<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+<script type="text/javascript" src=“/js/app.js”></script>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <script src=“/webjars/bootstrap/js/bootstrap.min.js”></script>
 </head>
@@ -40,7 +40,6 @@
 			        </c:choose>
 			      </div>
 			      <div class="navbar-nav" style="align-content: flex-end;">
-
 			       	<a class="nav-link"><c:out value="${loggedUser.userName}" /></a>
 			        <a class="nav-link" href="/logout">Logout</a>
 			      </div>
@@ -51,56 +50,19 @@
 	
 	<div class="content">
 		<div class="contentHeader">
-			<h1>Menu:</h1>
+			<h1>Add Photo for ${newProduct.itemName }</h1>
 		</div>
-		<div class="menuBody">
-			<c:forEach items="${allProducts}" var="product">
-				<div class="card" style="width: 15rem; display:flex; flex-direction: column; padding:5px; align-items: center; height:300px; margin-bottom:15px; border-color:rgb(64, 194, 198);">
-  					<c:choose>
-  						<c:when test="${product.picture == null }">
-  							<img src="images/productImage.png" class="card-img-top" alt="productImage" style="width:60px; height:60px">
-  						</c:when>
-  						<c:otherwise>
-  							<img src="${product.picture.url}" class="card-img-top" alt="${product.picture.description}" style="width:60px; height:60px">
-  						</c:otherwise>
-  					
-  					</c:choose>
-  					
-  					<div class="card-body" style="display:flex; flex-direction:column; align-items: center">
-   						 <h6 class="card-title"> <c:out value="${product.itemName}"/> </h6>
-    					 <p class="card-text" style="font-size: small;"> <c:out value="${product.description}"/></p>
-    					 
-    					 
-   						 <form action="/addItemToCart/${product.id}" method="POST">
-   						 	<label style="font-size: small;">Choose Amount:</label>
-   						 	<select name="quantity" class="form-select" aria-label="Default select example" style="width:75px; font-size: small;">
-							  <option value="1">1</option>
-							  <option value="2">2</option>
-							  <option value="3">3</option>
-							  <option value="4">4</option>
-							  <option value="5">5</option>
-							  <option value="6">6</option>
-							  <option value="7">7</option>
-							  <option value="8">8</option>
-							  <option value="9">9</option>
-							  <option value="10">10</option>
-							</select>
-							<br>
-							<button type="submit" style="font-size: small">Add To Cart</button>
-   						 </form>
-
-   						 
-  					</div>
-				</div>
-			</c:forEach>
-		</div>
-		<div class="contentFooter">
-		<h3><a href="/cart">Proceed to cart</a></h3>	 
+		
+		<div class="reg_form">
+			<form action="/addPicture/${newProduct.id }" method="post" enctype="multipart/form-data">
+					<input type="file" name="image">
+					<button>Upload!</button>
+			</form>
 		</div>
 	</div>
 	
 	<div class ="footer">
-		<img alt="logo" src="images/octopusLogo.png" class="headerLogo">
+		<img alt="logo" src="/images/octopusLogo.png" class="headerLogo">
 	</div>
 </div>
 </div>
