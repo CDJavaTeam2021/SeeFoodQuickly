@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>SFQ Cart</title>
 <link rel="stylesheet" type="text/css" href="css/style.css"/>
 <script type="text/javascript" src=“js/app.js”></script>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />

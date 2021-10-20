@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>SFQ Checkout</title>
 <link rel="stylesheet" type="text/css" href="css/style.css"/>
 <script type="text/javascript" src=“js/app.js”></script>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
@@ -74,20 +74,16 @@
 					<h6 style="display:flex; flex-direction:row; width:350px;justify-content: flex-end">Taxes: <fmt:formatNumber value = "${sessionScope.cartTotal * 0.0925}" type = "currency"/></h6>
 					<h5 style="display:flex; flex-direction:row; width:350px;justify-content: flex-end">Total Charge: <fmt:formatNumber value = "${sessionScope.cartTotal * 1.0925}" type = "currency"/></h5>
 					<hr>
-					<!-- 							CREDIT CARD PROCESSING
- -->
-
-
-					<!--  Stripe block below.  But currently doesn't work -->
+					<!-- 							CREDIT CARD PROCESSING    -->
 					
 					<form action='/charge' method='POST' id='checkout-form' xmlns:th="http://www.w3.org/1999/xhtml">
-					    <input type='hidden' th:value='${amount/100}' name='amount' />
-					   <%--  <h1>Price:<span th:text='${amount/100}' /></h1> --%>
+<%-- 					<input type='hidden' th:value='${sessionScope.cartTotal * 1.0925}' name='amount' />  --%>
+					    <input type='hidden' value='${sessionScope.cartTotal * 1.0925}' name='amount' />
 					    <script
 					            src='https://checkout.stripe.com/checkout.js'
 					            class='stripe-button'
-					            th:attr='data-key=${stripePublicKey},
-					         data-amount=${amount}'
+					            data-key="pk_test_51JkGb9LiLrBml3YZDf9jKApvu5SDJnA3DMAnJYWNnNMLVAt2kygpBCM6GQtJXnILH0k68HMl8Uv86Mx7TaXt3wtS00AIvnnaWm"
+					         	data-amount='${sessionScope.cartTotal * 109.25}'
 					            data-name='SFQ'
 					            data-description='Checkout'
 					            data-image='images/octopusLogo.png'
@@ -96,12 +92,6 @@
 					    </script>
 					</form>
 
-					<!--  Stripe block above.  But currently doesn't work -->
-
- 				<form action="/checkout" method="post">
-					<button>Order Submit [TEST]</button>
-
-				</form>
 				</div>
 		<div class="contentFooter">
 		</div>

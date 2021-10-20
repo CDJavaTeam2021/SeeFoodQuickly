@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="refresh" content="15">
-<title>Insert title here</title>
+<title>SFQ Orders</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 <script type="text/javascript" src=“/js/app.js”></script>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />

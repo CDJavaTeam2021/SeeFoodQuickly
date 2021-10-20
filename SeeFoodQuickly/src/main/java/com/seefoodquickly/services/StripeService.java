@@ -18,7 +18,7 @@ public class StripeService {
 
     @Autowired
     public StripeService() {
-        Stripe.apiKey = API_SECRET_KEY;
+        Stripe.apiKey = "sk_test_51JkGb9LiLrBml3YZ5PYRgJLaXWGpq6tB3Llmrzhjwgf3F3x5Z1sUe2vcJ3dzVxJ30HblSX3Sdnj4aEXsffVjGMeY00PgPTPOI6";
     }
 
     public Charge chargeNewCard(String token, double amount) throws Exception {

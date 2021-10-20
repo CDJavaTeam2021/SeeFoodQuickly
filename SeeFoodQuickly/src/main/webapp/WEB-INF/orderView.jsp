@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>SFQ Orders</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 <script type="text/javascript" src=“/js/app.js”></script>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
@@ -79,10 +79,10 @@
 			</table>
 			
 			<br>
-			<h6>Sub Total: $ ${thisOrder.subtotal}</h6>
-			<h6>Taxes: $<c:out value="${thisOrder.tax}"/></h6>
+			<h6>Sub Total: <fmt:formatNumber value = "${thisOrder.subtotal}" type = "currency"/></h6>
+			<h6>Taxes: <fmt:formatNumber value = "${thisOrder.tax}" type = "currency"/></h6>
 			<hr>
-			<h5>Total Charge: $ <c:out value="${thisOrder.total}"/></h5>
+			<h5>Total Charge: <fmt:formatNumber value = "${this.Order.total}" type = "currency"/></h5>
 
 			
 			
