@@ -83,7 +83,7 @@
 			<h6>Sub Total: <fmt:formatNumber value = "${thisOrder.subtotal}" type = "currency"/></h6>
 			<h6>Taxes: <fmt:formatNumber value = "${thisOrder.tax}" type = "currency"/></h6>
 			<hr>
-			<h5>Total Charge: <fmt:formatNumber value = "${this.Order.total}" type = "currency"/></h5>
+			<h5>Total Charge: <fmt:formatNumber value = "${thisOrder.total}" type = "currency"/></h5>
 
 			
 			
