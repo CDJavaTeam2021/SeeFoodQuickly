@@ -40,10 +40,11 @@ public class PaymentController {
     public String chargeCard(HttpServletRequest request, RedirectAttributes redAttr) throws Exception {
         String token = request.getParameter("stripeToken");
         Double amount = Double.parseDouble(request.getParameter("amount"));
-        //stripeService.chargeNewCard(token, amount);    //Commented out...not sure if it'll actually charge a card! S.YEE
-        System.out.println("Test payment submitted");
-        redAttr.addFlashAttribute("message", "Thank you for your payment of $" + amount);   //Nice confirmation message S. YEE
-        return "redirect:/testpayment";
+        stripeService.chargeNewCard(token, amount);    //Commented out...not sure if it'll actually charge a card! S.YEE
+        System.out.println("Payment submitted by paymentcontroller");
+//        redAttr.addFlashAttribute("message", "Thank you for your payment of $" + amount);   //Nice confirmation message S. YEE
+//        return "redirect:/testpayment";
+		return "redirect:/checkedout";
     }
     
 }

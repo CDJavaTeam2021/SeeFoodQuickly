@@ -154,8 +154,6 @@ public class HomeController {
 			User loggedUser = this.uServ.findUserById(userId);
 			model.addAttribute("loggedUser", loggedUser);
 			
-			
-			
 			return "checkout.jsp";
 		}
 	}
@@ -178,6 +176,22 @@ public class HomeController {
 			return "success.jsp";
 		}
 	}
+	
+	//Confirmation JSP
+//	@GetMapping("/success")
+//	public String confirmation(Model model, 
+//			HttpSession session) {
+//		if(session.getAttribute("userId")==null) {
+//			return "redirect:/";
+//		} else {
+//			Long userId = (Long)session.getAttribute("userId");
+//			User loggedUser = this.uServ.findUserById(userId);
+//			model.addAttribute("loggedUser", loggedUser);
+//			
+//			
+//			return "success.jsp";
+//		}
+//	}
 	
 	//All Orders JSP
 	@GetMapping("/orders")
@@ -413,7 +427,7 @@ public class HomeController {
 		}
 		
 	//Checkout and create new order
-		@PostMapping("/checkout")
+		@GetMapping("/checkedout")
 		public String newOrder(HttpSession session) {
 			Order order = oServ.checkout(session);
 			////  send Twilio confirmation that order is received
