@@ -55,8 +55,8 @@
 			<h1><c:out value="${title}"/></h1>
 		</div>
 		<div class="contentBody">
-		
-			<table class="table table-striped table-hover">
+			<div class="tableDiv" style="height:470px; overflow-y: scroll">
+			<table class="table table-striped table-hover" >
 				<thead>
 					<tr>
 						<th>Order #:</th>
@@ -94,8 +94,9 @@
 					</tr>
 					</c:forEach>
 				</tbody>
+				
 			</table>
-		
+			</div>
 		</div>
 		<div class="contentFooter">
 		<h3><a href="/menu">Place New Order</a></h3>	 
