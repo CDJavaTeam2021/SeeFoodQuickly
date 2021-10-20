@@ -13,6 +13,7 @@
 <script type="text/javascript" src=“js/app.js”></script>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <script src=“/webjars/bootstrap/js/bootstrap.min.js”></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -65,7 +66,11 @@
 				</p>
 				<p>
 					<form:label path="description">Description:</form:label>
-					<form:textarea type="text" path="description" class="form-control" style="width:300px"/>
+					<form:textarea type="text" maxlength="100" id="t1" path="description" class="form-control" style="width:300px"/>
+					<div style="width: 300px; display: flex; justify-content: flex-end; align-content: center">		     
+			           <div style="font-size:sml" id="d1">0</div>
+			           <p style="font-size: sml">/100</p>
+			        </div>
 				</p>
 				<p>
 					<form:label path="makeMinutes">Cook Time:</form:label>
@@ -82,8 +87,6 @@
 					<form:label path="price">Price: $</form:label>
 					<form:input type="float" path="price" class="form-control" style="width:100px"/>
 				</p>
-				
-				
 			</div>
 			<button type="submit" style="margin-left:110px; margin-top:20px;">Add New Item</button>
 		</form:form>
@@ -95,5 +98,16 @@
 	</div>
 </div>
 </div>
+<script>
+$(document).ready(function() {
+//////////////////////////
+$("#t1").attr('maxlength','100');
+$('#t1').keyup(function(){
+var str=$('#t1').val();
+$('#d1').html(str.length);
+})
+////////////
+})
+</script>
 </body>
 </html>
