@@ -101,6 +101,7 @@ public class OrderingService {
 	public List<Picture> allPictures(){
 		return (List<Picture>) picRepo.findAll();
 	}
+
 	
 	
 	//Item Methods
