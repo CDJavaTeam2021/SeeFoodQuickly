@@ -501,7 +501,7 @@ public class HomeController {
 	        Picture picture = oServ.addPicture(fileName, "Picture of " + product.getItemName() , product);
 
 	 
-	        String uploadDir = "images/products/" + fileName;
+	        String uploadDir = "/prodPics/" + fileName;
 	 
 	        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 	         

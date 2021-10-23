@@ -13,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="pictures")
@@ -105,6 +106,13 @@ public class Picture {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
+	
+	@Transient
+    public String getPhotosImagePath() {
+        if (url == null || id == null) return null;
+         
+        return "/prodPics/" + url;
+    }
 	
 	
 	
