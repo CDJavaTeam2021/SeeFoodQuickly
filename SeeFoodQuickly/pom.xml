@@ -8,13 +8,14 @@
 		<version>2.5.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.seefoodquickly</groupId>
+	<groupId>SeeFoodQuickly</groupId>
 	<artifactId>SeeFoodQuickly</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>SeeFoodQuickly</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -78,16 +79,6 @@
 	        	<artifactId>webjars-locator</artifactId>
 	        	<version>0.30</version>
 		</dependency>
-		<!-- Following dependency is for websockets Chet -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-websocket</artifactId>
-		</dependency>
-		<!-- Following dependency is for STOMP Broker Relay Chet -->
-		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-reactor-netty</artifactId>
-		</dependency>
 		<!-- Following dependency for Twilio Chet -->
 		<dependency>
 		  <groupId>com.twilio.sdk</groupId>
@@ -97,7 +88,8 @@
 		<dependency>
     <groupId>com.stripe</groupId>
     <artifactId>stripe-java</artifactId>
-    <version>10.12.1</version>
+    <version>20.90.0</version>
+<!--     <version>10.12.1</version> -->
 </dependency>
 	</dependencies>
 
@@ -110,4 +102,6 @@
 		</plugins>
 	</build>
 
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 </project>

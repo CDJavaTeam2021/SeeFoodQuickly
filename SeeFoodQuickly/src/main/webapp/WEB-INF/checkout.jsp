@@ -77,12 +77,11 @@
 					<!-- 							CREDIT CARD PROCESSING    -->
 					
 					<form action='/charge' method='POST' id='checkout-form' xmlns:th="http://www.w3.org/1999/xhtml">
-<%-- 					<input type='hidden' th:value='${sessionScope.cartTotal * 1.0925}' name='amount' />  --%>
 					    <input type='hidden' value='${sessionScope.cartTotal * 1.0925}' name='amount' />
 					    <script
 					            src='https://checkout.stripe.com/checkout.js'
 					            class='stripe-button'
-					            data-key="pk_test_51JkGb9LiLrBml3YZDf9jKApvu5SDJnA3DMAnJYWNnNMLVAt2kygpBCM6GQtJXnILH0k68HMl8Uv86Mx7TaXt3wtS00AIvnnaWm"
+					            data-key='${stripePublicKey}'
 					         	data-amount='${sessionScope.cartTotal * 109.25}'
 					            data-name='SFQ'
 					            data-description='Checkout'
