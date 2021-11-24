@@ -1,7 +1,3 @@
-
-////Adam Added this when trying to do the payments API to Stripe
-//Fake Public Key: pk_test_51JkGb9LiLrBml3YZDf9jKApvu5SDJnA3DMAnJYWNnNMLVAt2kygpBCM6GQtJXnILH0k68HMl8Uv86Mx7TaXt3wtS00AIvnnaWm
-//Fake Private Key: sk_test_51JkGb9LiLrBml3YZ5PYRgJLaXWGpq6tB3Llmrzhjwgf3F3x5Z1sUe2vcJ3dzVxJ30HblSX3Sdnj4aEXsffVjGMeY00PgPTPOI6
 package com.seefoodquickly.controllers;
 
 import javax.servlet.http.HttpServletRequest;

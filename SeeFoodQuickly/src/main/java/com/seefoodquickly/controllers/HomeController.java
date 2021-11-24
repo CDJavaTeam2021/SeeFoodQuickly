@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,6 +33,8 @@ import com.seefoodquickly.validators.UserValidator;
 
 @Controller
 public class HomeController {
+	@Value("${STRIPE_PUBLIC_KEY}")
+    private String stripePublicKey;
 	
 	@Autowired
 	UserService uServ;
@@ -153,7 +156,8 @@ public class HomeController {
 			Long userId = (Long)session.getAttribute("userId");
 			User loggedUser = this.uServ.findUserById(userId);
 			model.addAttribute("loggedUser", loggedUser);
-			
+	        model.addAttribute("stripePublicKey", stripePublicKey);
+
 			return "checkout.jsp";
 		}
 	}
