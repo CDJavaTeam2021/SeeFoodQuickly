@@ -1,3 +1,4 @@
 /.metadata/
 **/src/main/resources/application.yml
 **/src/main/resoruces/application.properties
+.DS_Store
